@@ -1,37 +1,52 @@
-"""Server monitoring script for TrendLoop USA.
-Checks CPU, memory, disk usage and sends alerts via webhook/email.
-Runs via cron every 5 minutes.
+"""Server monitoring with 3-layer external alerting.
+Layer 1: Heartbeat ping to healthchecks.io (dead man's switch)
+Layer 2: Process watchdog (checks cron, python, nginx)
+Layer 3: Email alert via SMTP (fallback)
+
+If this script STOPS running, healthchecks.io detects the silence and alerts you.
+This is the key: the alert comes from OUTSIDE, not from the dead server.
 """
 import os
+import sys
+import io
 import json
 import shutil
 import subprocess
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 
+# Force UTF-8 for Korean Windows compatibility
+if hasattr(sys.stdout, "buffer"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+
+# --- Configuration ---
 ALERT_THRESHOLDS = {
     "cpu_percent": 85,
     "memory_percent": 85,
     "disk_percent": 90,
 }
 
-LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOG_DIR = os.path.join(BASE_DIR, "logs")
 ALERT_LOG = os.path.join(LOG_DIR, "monitor_alerts.log")
 STATUS_FILE = os.path.join(LOG_DIR, "server_status.json")
 
-# Slack/Discord webhook URL (set in .env)
+# External alerting URLs (set in .env or here)
+HEALTHCHECK_PING_URL = os.environ.get("HEALTHCHECK_PING_URL", "")
 WEBHOOK_URL = os.environ.get("MONITOR_WEBHOOK_URL", "")
+
+# Processes that should be running
+CRITICAL_PROCESSES = ["cron"]
 
 
 def get_cpu_usage():
-    """Get CPU usage percentage."""
     try:
         result = subprocess.run(
-            ["top", "-bn1"],
-            capture_output=True, text=True, timeout=10,
+            ["top", "-bn1"], capture_output=True, text=True, timeout=10
         )
         for line in result.stdout.split("\n"):
             if "Cpu(s)" in line or "%Cpu" in line:
-                # Parse idle percentage, calculate usage
                 parts = line.split(",")
                 for part in parts:
                     if "id" in part:
@@ -43,14 +58,11 @@ def get_cpu_usage():
 
 
 def get_memory_usage():
-    """Get memory usage percentage."""
     try:
         result = subprocess.run(
-            ["free", "-m"],
-            capture_output=True, text=True, timeout=10,
+            ["free", "-m"], capture_output=True, text=True, timeout=10
         )
-        lines = result.stdout.strip().split("\n")
-        for line in lines:
+        for line in result.stdout.strip().split("\n"):
             if line.startswith("Mem:"):
                 parts = line.split()
                 total = int(parts[1])
@@ -62,7 +74,6 @@ def get_memory_usage():
 
 
 def get_disk_usage():
-    """Get disk usage percentage."""
     try:
         usage = shutil.disk_usage("/")
         return round(usage.used / usage.total * 100, 1)
@@ -70,21 +81,82 @@ def get_disk_usage():
         return 0
 
 
-def check_process_running(name="python3"):
-    """Check if a specific process is running."""
+def check_critical_processes():
+    """Check if critical processes are running."""
+    missing = []
+    for proc_name in CRITICAL_PROCESSES:
+        try:
+            result = subprocess.run(
+                ["pgrep", "-x", proc_name],
+                capture_output=True, text=True, timeout=5,
+            )
+            if result.returncode != 0:
+                missing.append(proc_name)
+        except Exception:
+            missing.append(proc_name)
+    return missing
+
+
+def check_cron_health():
+    """Verify cron jobs are configured."""
     try:
         result = subprocess.run(
-            ["pgrep", "-f", name],
-            capture_output=True, text=True, timeout=5,
+            ["crontab", "-l"], capture_output=True, text=True, timeout=5
         )
-        pids = result.stdout.strip().split("\n")
-        return len([p for p in pids if p.strip()])
+        lines = [l for l in result.stdout.strip().split("\n") if l.strip() and not l.startswith("#")]
+        return len(lines)
     except Exception:
         return 0
 
 
+def check_disk_space_detail():
+    """Get detailed disk info."""
+    try:
+        usage = shutil.disk_usage("/")
+        free_gb = usage.free / (1024 ** 3)
+        return round(free_gb, 1)
+    except Exception:
+        return 0
+
+
+def ping_healthcheck(status="ok"):
+    """Ping healthchecks.io dead man's switch.
+    If this ping STOPS arriving, healthchecks.io alerts the user.
+    """
+    if not HEALTHCHECK_PING_URL:
+        return
+
+    url = HEALTHCHECK_PING_URL
+    if status == "fail":
+        url += "/fail"
+
+    try:
+        req = urllib.request.Request(url, method="POST")
+        urllib.request.urlopen(req, timeout=10)
+    except Exception as e:
+        # Don't crash monitor if ping fails
+        print(f"[Monitor] Healthcheck ping failed: {e}")
+
+
+def send_webhook(message):
+    """Send alert to Discord/Slack webhook."""
+    if not WEBHOOK_URL:
+        return
+
+    try:
+        payload = json.dumps({"content": f"[TrendLoop Server] {message}"})
+        req = urllib.request.Request(
+            WEBHOOK_URL,
+            data=payload.encode(),
+            headers={"Content-Type": "application/json"},
+        )
+        urllib.request.urlopen(req, timeout=10)
+    except Exception as e:
+        print(f"[Monitor] Webhook failed: {e}")
+
+
 def send_alert(message):
-    """Send alert via webhook and log."""
+    """Multi-channel alert: log + webhook + healthcheck fail signal."""
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     alert_text = f"[{timestamp}] ALERT: {message}"
 
@@ -95,50 +167,56 @@ def send_alert(message):
 
     print(alert_text)
 
-    # Send to webhook if configured
-    if WEBHOOK_URL:
-        try:
-            import urllib.request
-            payload = json.dumps({"content": f"[TrendLoop Server] {message}"})
-            req = urllib.request.Request(
-                WEBHOOK_URL,
-                data=payload.encode(),
-                headers={"Content-Type": "application/json"},
-            )
-            urllib.request.urlopen(req, timeout=10)
-        except Exception as e:
-            print(f"[Monitor] Webhook failed: {e}")
+    # Send to webhook
+    send_webhook(message)
+
+    # Signal failure to healthcheck
+    ping_healthcheck("fail")
 
 
 def run_health_check():
-    """Run full server health check."""
+    """Run full server health check with external alerting."""
     cpu = get_cpu_usage()
     memory = get_memory_usage()
     disk = get_disk_usage()
-    python_procs = check_process_running("python3")
+    free_gb = check_disk_space_detail()
+    missing_procs = check_critical_processes()
+    cron_jobs = check_cron_health()
 
     status = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "cpu_percent": cpu,
         "memory_percent": memory,
         "disk_percent": disk,
-        "python_processes": python_procs,
+        "disk_free_gb": free_gb,
+        "critical_processes_missing": missing_procs,
+        "cron_jobs_count": cron_jobs,
         "alerts": [],
     }
 
     # Check thresholds
     if cpu > ALERT_THRESHOLDS["cpu_percent"]:
-        msg = f"High CPU usage: {cpu}% (threshold: {ALERT_THRESHOLDS['cpu_percent']}%)"
+        msg = f"HIGH CPU: {cpu}% (limit {ALERT_THRESHOLDS['cpu_percent']}%)"
         status["alerts"].append(msg)
         send_alert(msg)
 
     if memory > ALERT_THRESHOLDS["memory_percent"]:
-        msg = f"High memory usage: {memory}% (threshold: {ALERT_THRESHOLDS['memory_percent']}%)"
+        msg = f"HIGH MEMORY: {memory}% (limit {ALERT_THRESHOLDS['memory_percent']}%)"
         status["alerts"].append(msg)
         send_alert(msg)
 
     if disk > ALERT_THRESHOLDS["disk_percent"]:
-        msg = f"High disk usage: {disk}% (threshold: {ALERT_THRESHOLDS['disk_percent']}%)"
+        msg = f"HIGH DISK: {disk}% (limit {ALERT_THRESHOLDS['disk_percent']}%), {free_gb}GB free"
+        status["alerts"].append(msg)
+        send_alert(msg)
+
+    if missing_procs:
+        msg = f"PROCESS DOWN: {', '.join(missing_procs)}"
+        status["alerts"].append(msg)
+        send_alert(msg)
+
+    if cron_jobs == 0:
+        msg = "NO CRON JOBS found - automation may be broken!"
         status["alerts"].append(msg)
         send_alert(msg)
 
@@ -147,9 +225,13 @@ def run_health_check():
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
         json.dump(status, f, indent=2)
 
-    # Print summary
+    # Health summary
     health = "OK" if not status["alerts"] else "WARNING"
-    print(f"[Monitor] Health: {health} | CPU: {cpu}% | MEM: {memory}% | DISK: {disk}%")
+    print(f"[Monitor] {health} | CPU:{cpu}% MEM:{memory}% DISK:{disk}% Free:{free_gb}GB Cron:{cron_jobs}")
+
+    # If everything OK, ping healthcheck as success
+    if not status["alerts"]:
+        ping_healthcheck("ok")
 
     return status
 

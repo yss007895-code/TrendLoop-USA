@@ -32,6 +32,7 @@ from agents.vertex_agent import analyze_trends_deep, generate_blog_images
 from agents.vision_agent import enrich_blog_post
 from agents.translation_agent import translate_to_all_languages
 from agents.affiliate_links import inject_affiliate_links
+from agents.indexing_agent import notify_url_updated, submit_batch
 
 
 def _timeout_handler(signum, frame):
@@ -262,26 +263,30 @@ def main():
         shorts_ok = False
     print()
 
-    # ━━━━━━ STEP 7: 다국어 번역 ━━━━━━
-    print("[STEP 7] Translation API - 다국어 포스팅 생성 중...")
+    # ━━━━━━ STEP 7: 번역 비활성화 (영어 전용) ━━━━━━
+    print("[STEP 7] English-only mode. Translation disabled.")
     print("-" * 40)
     translations = {}
-    try:
-        html_path = blog.get("file_path", "")
-        if html_path and os.path.exists(html_path):
-            with open(html_path, "r", encoding="utf-8") as f:
-                html_body = f.read()
-            translations = translate_to_all_languages(html_body, blog["slug"])
-            print(f"[STEP 7] {len(translations)} languages translated")
-        else:
-            print("[STEP 7] No HTML file to translate.")
-    except Exception as e:
-        print(f"[STEP 7 오류] {e}")
-        translations = {}
+    print("[STEP 7] Skipped - budget redirected to more posts.")
 
     elapsed = time.time() - start_time
     print(f"[타이머] STEP 7 완료 ({elapsed:.1f}초 경과)")
     print()
+
+    # ━━━━━━ STEP 7.5: Google Indexing API - 즉시 검색 노출 ━━━━━━
+    print("[STEP 7.5] Google Indexing API - 즉시 검색 노출 요청 중...")
+    print("-" * 40)
+    try:
+        index_result = notify_url_updated(blog["slug"])
+        if index_result:
+            print("[STEP 7.5] Google Indexing API - 즉시 색인 요청 완료!")
+        else:
+            print("[STEP 7.5] Indexing API not available. Enable in Cloud Console.")
+    except Exception as e:
+        print(f"[STEP 7.5 오류] {e}")
+
+    elapsed = time.time() - start_time
+    print(f"[타이머] STEP 7.5 완료 ({elapsed:.1f}초 경과)")
 
     # ━━━━━━ 결과 요약 ━━━━━━
     total_time = time.time() - start_time

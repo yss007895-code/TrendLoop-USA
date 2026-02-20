@@ -15,6 +15,12 @@ from google import genai
 from config import GEMINI_API_KEY, AMAZON_TAG, BLOG_BASE_URL
 from safety import tracker
 
+try:
+    from agents.indexing_agent import notify_url_updated
+    HAS_INDEXING = True
+except ImportError:
+    HAS_INDEXING = False
+
 client = genai.Client(api_key=GEMINI_API_KEY)
 MODEL = "gemini-2.5-flash"
 FALLBACK = "gemini-2.5-pro"
