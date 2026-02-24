@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendLoop USA - Fashion Trends & Style Guides</title>
+    <meta name="description" content="Expert fashion advice, trend analysis, and curated product picks. Your daily source for style inspiration and smart shopping.">
+    <meta name="author" content="TrendLoop USA Team">
+    <link rel="canonical" href="https://trendloopusa.net/">
+    <link rel="alternate" type="application/rss+xml" title="TrendLoop USA" href="https://trendloopusa.net/feed.xml">
+    <meta property="og:title" content="TrendLoop USA - Fashion Trends & Style Guides">
+    <meta property="og:description" content="Expert fashion advice, trend analysis, and curated product picks.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trendloopusa.net/">
+    <meta property="og:site_name" content="TrendLoop USA">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    { "@context": "https://schema.org", "@type": "WebSite", "name": "TrendLoop USA", "url": "https://trendloopusa.net", "description": "Expert fashion advice and curated product picks" }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8049649445649586" crossorigin="anonymous"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; color: #1a1a2e; background: #ffffff; }
+
+        :root {
+            --bg: #ffffff;
+            --bg-off: #f8f9fa;
+            --text: #1a1a2e;
+            --text-light: #6b7280;
+            --text-muted: #9ca3af;
+            --border: #e5e7eb;
+            --pink: #ff2d55;
+            --pink-light: #fff0f3;
+            --blue: #0066ff;
+            --blue-light: #eef4ff;
+            --lime: #32d74b;
+            --lime-light: #edfff0;
+            --orange: #ff6b00;
+            --orange-light: #fff5eb;
+            --purple: #af52de;
+            --purple-light: #f8f0ff;
+            --yellow: #ffd60a;
+            --yellow-light: #fffde6;
+        }
+
+        /* === NAVIGATION === */
+        .nav { background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-ticker { background: var(--pink); padding: 6px 0; text-align: center; overflow: hidden; }
+        .nav-ticker span { color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+        .nav-brand { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8em; font-weight: 900; color: var(--text); text-decoration: none; text-transform: uppercase; letter-spacing: -0.5px; }
+        .nav-brand span { color: var(--pink); }
+        .nav-links { display: flex; gap: 4px; list-style: none; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.78em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px; border-radius: 20px; transition: all 0.2s; }
+        .nav-links a:hover { color: var(--pink); background: var(--pink-light); }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.5em; cursor: pointer; color: var(--text); }
+
+        /* === CATEGORY PILLS === */
+        .categories { padding: 12px 20px; overflow-x: auto; white-space: nowrap; border-bottom: 1px solid var(--border); background: var(--bg-off); -webkit-overflow-scrolling: touch; }
+        .categories::-webkit-scrollbar { display: none; }
+        .cat-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 8px; }
+        .cat-pill { display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.75em; font-weight: 600; text-decoration: none; transition: all 0.2s; border: 1.5px solid transparent; white-space: nowrap; }
+        .cat-pill.active { background: var(--pink); color: #fff; border-color: var(--pink); }
+        .cat-pill:not(.active) { color: var(--text-light); border-color: var(--border); background: var(--bg); }
+        .cat-pill:not(.active):hover { border-color: var(--pink); color: var(--pink); }
+
+        /* === HERO === */
+        .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 380px; display: flex; align-items: center; }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 50px 24px; width: 100%; position: relative; z-index: 2; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--pink); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.65em; font-weight: 700; padding: 5px 14px; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; margin-bottom: 20px; }
+        .hero-badge .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5em; font-weight: 900; color: #fff; line-height: 1.05; text-transform: uppercase; margin-bottom: 16px; max-width: 700px; }
+        .hero h1 em { font-style: normal; color: var(--pink); }
+        .hero p { color: rgba(255,255,255,0.7); font-size: 1.05em; max-width: 550px; line-height: 1.7; }
+        .hero-shapes { position: absolute; right: -50px; top: -50px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(255,45,85,0.15) 0%, transparent 70%); z-index: 1; }
+        .hero-shapes2 { position: absolute; left: 30%; bottom: -100px; width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(0,102,255,0.1) 0%, transparent 70%); z-index: 1; }
+
+        /* === CONTAINER === */
+        .container { max-width: 1200px; margin: 0 auto; padding: 32px 20px; }
+
+        /* === SECTION HEADERS === */
+        .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .section-head h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.6em; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text); }
+        .section-head .more { font-size: 0.78em; font-weight: 600; color: var(--pink); text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }
+        .section-head .more:hover { text-decoration: underline; }
+
+        /* === CARD GRID === */
+        .grid-featured { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-bottom: 32px; }
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 32px; }
+
+        .card { background: var(--bg); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); transition: all 0.25s; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); border-color: transparent; }
+        .card a { text-decoration: none; color: inherit; display: block; }
+        .card-img { width: 100%; object-fit: cover; display: block; }
+        .card-big .card-img { height: 320px; }
+        .card-sm .card-img { height: 180px; }
+        .card-body { padding: 16px 18px; }
+        .card-tag { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.65em; font-weight: 700; padding: 3px 10px; text-transform: uppercase; letter-spacing: 1.5px; border-radius: 4px; margin-bottom: 8px; }
+        .tag-trending { background: var(--pink-light); color: var(--pink); }
+        .tag-guide { background: var(--blue-light); color: var(--blue); }
+        .tag-hot { background: var(--orange-light); color: var(--orange); }
+        .tag-style { background: var(--purple-light); color: var(--purple); }
+        .tag-budget { background: var(--lime-light); color: #1a8f2d; }
+        .tag-featured { background: var(--yellow-light); color: #b8960c; }
+        .card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; line-height: 1.25; color: var(--text); text-transform: uppercase; margin-bottom: 8px; }
+        .card-big h3 { font-size: 1.5em; }
+        .card-sm h3 { font-size: 1.1em; }
+        .card .excerpt { color: var(--text-light); font-size: 0.85em; line-height: 1.6; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card .meta { color: var(--text-muted); font-size: 0.72em; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Gradient image placeholders (replacing Unsplash) */
+        .img-placeholder { width: 100%; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 3em; font-weight: 900; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px; }
+        .img-fashion { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .img-summer { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .img-handbag { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .img-luxury { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .img-alert { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .img-eco { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .img-blazer { background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); }
+        .img-denim { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        .img-capsule { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+
+        /* === DISCLOSURE === */
+        .disclosure { background: var(--bg-off); border-left: 4px solid var(--pink); border-radius: 0 8px 8px 0; padding: 14px 20px; margin-bottom: 24px; font-size: 0.82em; color: var(--text-light); }
+        .disclosure a { color: var(--pink); text-decoration: none; font-weight: 600; }
+        .disclosure a:hover { text-decoration: underline; }
+
+        /* === AD SLOT === */
+        .ad-slot { background: var(--bg-off); border: 1px dashed var(--border); border-radius: 8px; padding: 24px; text-align: center; margin: 24px 0; color: var(--text-muted); font-size: 0.82em; min-height: 90px; display: flex; align-items: center; justify-content: center; }
+
+        /* === FOOTER === */
+        .footer { background: var(--text); color: rgba(255,255,255,0.5); padding: 48px 20px 24px; margin-top: 40px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
+        .footer h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1em; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .footer p { font-size: 0.85em; line-height: 1.8; }
+        .footer a { color: var(--pink); text-decoration: none; }
+        .footer a:hover { color: #fff; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 8px; }
+        .footer-links a { color: rgba(255,255,255,0.5); font-size: 0.85em; }
+        .footer-links a:hover { color: var(--pink); }
+        .footer-bottom { max-width: 1200px; margin: 24px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 0.75em; color: rgba(255,255,255,0.3); }
+
+        /* === MOBILE === */
+        @media (max-width: 768px) {
+            .hero { min-height: 300px; }
+            .hero h1 { font-size: 2.2em; }
+            .grid-featured { grid-template-columns: 1fr; }
+            .card-big .card-img { height: 220px; }
+            .grid-cards { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+            .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+            .nav-links { display: none; position: absolute; top: 60px; left: 0; right: 0; background: var(--bg); flex-direction: column; padding: 12px 20px; border-bottom: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+            .nav-links.open { display: flex; }
+            .nav-links a { padding: 10px 0; border-radius: 0; }
+            .nav-toggle { display: block; }
+            .hero-shapes, .hero-shapes2 { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-ticker"><span>Trending Now: Spring 2026 Fashion Drops</span></div>
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">TREND<span>LOOP</span> USA</a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
+                <li><a href="/disclaimer.html">Disclaimer</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Category Pills -->
+    <div class="categories">
+        <div class="cat-inner">
+            <a href="/" class="cat-pill active">All</a>
+            <a href="/" class="cat-pill">Trending</a>
+            <a href="/" class="cat-pill">Street Style</a>
+            <a href="/" class="cat-pill">Luxury</a>
+            <a href="/" class="cat-pill">Budget Finds</a>
+            <a href="/" class="cat-pill">Seasonal</a>
+            <a href="/" class="cat-pill">Guides</a>
+            <a href="/" class="cat-pill">Celebrity Style</a>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-shapes"></div>
+        <div class="hero-shapes2"></div>
+        <div class="hero-content">
+            <span class="hero-badge"><span class="dot"></span> Live Trending</span>
+            <h1>Your Daily Dose of <em>Fashion</em> Intelligence</h1>
+            <p>AI-powered trend analysis, expert style guides, and curated outfit inspiration -- updated daily for the style-obsessed.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Affiliate Disclosure -->
+        <div class="disclosure">
+            This site contains affiliate links. If you purchase through our links, we may earn a small commission at no extra cost to you. <a href="/disclaimer.html">Learn more</a>.
+        </div>
+
+        <!-- Top Ad Slot -->
+        <div class="ad-slot">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8049649445649586" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- TOP STORIES -->
+        <div class="section-head">
+            <h2>Top Stories</h2>
+            <a href="/" class="more">View All</a>
+        </div>
+
+        <div class="grid-featured">
+            <!-- Main Story -->
+            <div class="card card-big">
+                <a href="/posts/001.html">
+                    <div class="card-img img-placeholder img-fashion" style="height:320px">STYLE</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-featured">Featured</span>
+                        <h3>The Enduring Allure of 90s Minimalism: A Refined Resurgence</h3>
+                        <p class="excerpt">Dive into the refined resurgence of 90s minimalism. Discover how clean lines, impeccable fabrication, and a pared-back palette define luxury now.</p>
+                        <p class="meta">By TrendLoop USA Team</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Side Stories -->
+            <div style="display:flex;flex-direction:column;gap:16px">
+                <div class="card card-sm">
+                    <a href="/2026-02-20-flattering-plus-size-outfit-ideas-for-summer-vacations-2026.html">
+                        <div class="card-img img-placeholder img-summer" style="height:140px">SUMMER</div>
+                        <div class="card-body">
+                            <span class="card-tag tag-trending">Trending</span>
+                            <h3>Flattering Plus Size Outfit Ideas for Summer 2026</h3>
+                            <p class="meta">Feb 20, 2026</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="card card-sm">
+                    <a href="/2026-02-20-investing-in-a-classic-designer-handbag-what-to-consider-now.html">
+                        <div class="card-img img-placeholder img-handbag" style="height:140px">LUXURY</div>
+                        <div class="card-body">
+                            <span class="card-tag tag-guide">Guide</span>
+                            <h3>Investing in a Classic Designer Handbag: What to Know</h3>
+                            <p class="meta">Feb 20, 2026</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MORE STORIES -->
+        <div class="section-head">
+            <h2>More Stories</h2>
+            <a href="/" class="more">Explore</a>
+        </div>
+
+        <div class="grid-cards">
+            <div class="card card-sm">
+                <a href="/2026-02-20-ss26-the-ethereal-edge-of-elevated-luxury-navigating-the-new.html">
+                    <div class="card-img img-placeholder img-luxury" style="height:180px">SS26</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-style">Analysis</span>
+                        <h3>SS26: The Ethereal Edge of Elevated Luxury</h3>
+                        <p class="excerpt">Navigating the new wave of elevated fashion with ethereal textures and bold silhouettes.</p>
+                        <p class="meta">Feb 20, 2026</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card card-sm">
+                <a href="/2026-02-20-style-alert-decoding-today-s-hottest-fashion-trend.html">
+                    <div class="card-img img-placeholder img-alert" style="height:180px">HOT</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-hot">Hot</span>
+                        <h3>Style Alert! Decoding Today's Hottest Fashion Trends</h3>
+                        <p class="excerpt">Breaking down the most viral fashion moments and how to recreate them.</p>
+                        <p class="meta">Feb 20, 2026</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card card-sm">
+                <a href="/2026-02-20-top-sustainable-fashion-trends-shaping-2026-style-choices.html">
+                    <div class="card-img img-placeholder img-eco" style="height:180px">ECO</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-guide">Guide</span>
+                        <h3>Top Sustainable Fashion Trends Shaping 2026</h3>
+                        <p class="excerpt">How to build an eco-conscious wardrobe without sacrificing style.</p>
+                        <p class="meta">Feb 20, 2026</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card card-sm">
+                <a href="/2026-02-20-how-to-style-a-blazer-with-jeans-for-smart-casual-look.html">
+                    <div class="card-img img-placeholder img-blazer" style="height:180px">STYLE</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-style">Style</span>
+                        <h3>How to Style a Blazer with Jeans for Smart Casual</h3>
+                        <p class="excerpt">Master the blazer-and-jeans combination for work, dates, and weekend brunch.</p>
+                        <p class="meta">Feb 20, 2026</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card card-sm">
+                <a href="/2026-02-20-best-affordable-denim-jeans-under-50-for-women-s-everyday-we.html">
+                    <div class="card-img img-placeholder img-denim" style="height:180px">DENIM</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-budget">Budget</span>
+                        <h3>Best Affordable Denim Jeans Under $50</h3>
+                        <p class="excerpt">Great jeans don't have to cost a fortune. Our tested picks for the best budget denim.</p>
+                        <p class="meta">Feb 20, 2026</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="card card-sm">
+                <a href="/2026-02-20-the-complete-guide-to-building-a-minimalist-capsule-wardrobe.html">
+                    <div class="card-img img-placeholder img-capsule" style="height:180px">CAPSULE</div>
+                    <div class="card-body">
+                        <span class="card-tag tag-guide">Guide</span>
+                        <h3>Building a Minimalist Capsule Wardrobe</h3>
+                        <p class="excerpt">Simplify your closet and maximize your outfits with this step-by-step guide.</p>
+                        <p class="meta">Feb 20, 2026</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Bottom Ad Slot -->
+        <div class="ad-slot">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8049649445649586" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <h4>TrendLoop USA</h4>
+                <p>Expert fashion advice, trend analysis, and curated product picks. We help you make smart style decisions without the guesswork.</p>
+                <p style="margin-top: 12px;">Contact: <a href="mailto:contact@trendloopusa.net">contact@trendloopusa.net</a></p>
+            </div>
+            <div>
+                <h4>Pages</h4>
+                <ul class="footer-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                    <li><a href="/feed.xml">RSS Feed</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/disclaimer.html">Disclaimer & FTC</a></li>
+                    <li><a href="/terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TrendLoop USA. All rights reserved.</p>
+            <p><a href="/disclaimer.html">Affiliate Disclosure</a></p>
+        </div>
+    </footer>
+</body>
+</html>
