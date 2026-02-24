@@ -240,16 +240,16 @@
     <!-- Category Pills -->
     <div class="categories">
         <div class="cat-inner">
-            <a href="/" class="cat-pill active">All</a>
-            <a href="/" class="cat-pill">Trending</a>
-            <a href="/" class="cat-pill">Street Style</a>
-            <a href="/" class="cat-pill">Luxury</a>
-            <a href="/" class="cat-pill">Best Dupes</a>
-            <a href="/" class="cat-pill">Budget Finds</a>
-            <a href="/" class="cat-pill">Sustainable</a>
-            <a href="/" class="cat-pill">Guides</a>
-            <a href="/" class="cat-pill">Celebrity Style</a>
-            <a href="/" class="cat-pill">Fashion Comeback</a>
+            <a href="#" class="cat-pill active" data-filter="all">All</a>
+            <a href="#" class="cat-pill" data-filter="trending">Trending</a>
+            <a href="#" class="cat-pill" data-filter="street-style">Street Style</a>
+            <a href="#" class="cat-pill" data-filter="luxury">Luxury</a>
+            <a href="#" class="cat-pill" data-filter="best-dupes">Best Dupes</a>
+            <a href="#" class="cat-pill" data-filter="budget-finds">Budget Finds</a>
+            <a href="#" class="cat-pill" data-filter="sustainable">Sustainable</a>
+            <a href="#" class="cat-pill" data-filter="guides">Guides</a>
+            <a href="#" class="cat-pill" data-filter="celebrity">Celebrity Style</a>
+            <a href="#" class="cat-pill" data-filter="comeback">Fashion Comeback</a>
         </div>
     </div>
 
@@ -314,7 +314,7 @@
 
         <div class="grid-featured">
             <!-- Main Story -->
-            <div class="card card-big">
+            <div class="card card-big" data-category="trending street-style">
                 <a href="/posts/001.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/card-minimalism.webp" alt="90s Minimalism Fashion Editorial" style="height:340px"
@@ -331,7 +331,7 @@
 
             <!-- Side Stories -->
             <div style="display:flex;flex-direction:column;gap:16px">
-                <div class="card card-sm">
+                <div class="card card-sm" data-category="trending street-style">
                     <a href="/2026-02-20-flattering-plus-size-outfit-ideas-for-summer-vacations-2026.html">
                         <div class="card-img-wrap">
                             <img class="card-img" src="/images/card-summer.webp" alt="Summer Fashion 2026" style="height:155px"
@@ -344,7 +344,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="card card-sm">
+                <div class="card card-sm" data-category="luxury guides">
                     <a href="/2026-02-20-investing-in-a-classic-designer-handbag-what-to-consider-now.html">
                         <div class="card-img-wrap">
                             <img class="card-img" src="/images/card-handbag.webp" alt="Designer Handbag Guide" style="height:155px"
@@ -367,7 +367,7 @@
         </div>
 
         <div class="grid-cards">
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="guides">
                 <a href="/guides/best-air-purifier-2026/">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/best-air-purifier-2026-hero.jpg" alt="Best Air Purifier 2026" style="height:200px"
@@ -382,7 +382,7 @@
                 </a>
             </div>
 
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="trending luxury">
                 <a href="/2026-02-20-ss26-the-ethereal-edge-of-elevated-luxury-navigating-the-new.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/card-luxury.webp" alt="SS26 Luxury Fashion" style="height:200px"
@@ -397,7 +397,7 @@
                 </a>
             </div>
 
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="trending street-style">
                 <a href="/2026-02-20-style-alert-decoding-today-s-hottest-fashion-trend.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/hero-editorial.webp" alt="Hottest Fashion Trends 2026" style="height:200px"
@@ -412,7 +412,7 @@
                 </a>
             </div>
 
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="sustainable guides">
                 <a href="/2026-02-20-top-sustainable-fashion-trends-shaping-2026-style-choices.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/card-sustainable.webp" alt="Sustainable Fashion 2026" style="height:200px"
@@ -427,7 +427,7 @@
                 </a>
             </div>
 
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="street-style">
                 <a href="/2026-02-20-how-to-style-a-blazer-with-jeans-for-smart-casual-look.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/card-blazer.webp" alt="Blazer Style Guide" style="height:200px"
@@ -442,7 +442,7 @@
                 </a>
             </div>
 
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="budget-finds best-dupes">
                 <a href="/2026-02-20-best-affordable-denim-jeans-under-50-for-women-s-everyday-we.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/card-minimalism.webp" alt="Best Affordable Denim Jeans" style="height:200px"
@@ -457,7 +457,7 @@
                 </a>
             </div>
 
-            <div class="card card-sm">
+            <div class="card card-sm" data-category="guides sustainable">
                 <a href="/2026-02-20-the-complete-guide-to-building-a-minimalist-capsule-wardrobe.html">
                     <div class="card-img-wrap">
                         <img class="card-img" src="/images/card-sustainable.webp" alt="Minimalist Capsule Wardrobe Guide" style="height:200px"
@@ -486,7 +486,7 @@
         </div>
 
         <div class="grid-2col">
-            <div class="card" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
+            <div class="card" data-category="best-dupes luxury" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
                 <div style="flex-shrink:0;width:130px">
                     <div class="img-placeholder img-dupe" style="height:130px;font-size:1.4em">DUPE</div>
                 </div>
@@ -497,7 +497,7 @@
                 </div>
             </div>
 
-            <div class="card" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
+            <div class="card" data-category="best-dupes budget-finds" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
                 <div style="flex-shrink:0;width:130px">
                     <div class="img-placeholder img-fashion" style="height:130px;font-size:1.4em">ALT</div>
                 </div>
@@ -508,7 +508,7 @@
                 </div>
             </div>
 
-            <div class="card" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
+            <div class="card" data-category="best-dupes" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
                 <div style="flex-shrink:0;width:130px">
                     <div class="img-placeholder img-summer" style="height:130px;font-size:1.4em">LOOK</div>
                 </div>
@@ -519,7 +519,7 @@
                 </div>
             </div>
 
-            <div class="card" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
+            <div class="card" data-category="budget-finds" style="display:flex;flex-direction:row;align-items:center;overflow:hidden">
                 <div style="flex-shrink:0;width:130px">
                     <div class="img-placeholder img-eco" style="height:130px;font-size:1.4em">FIND</div>
                 </div>
@@ -596,5 +596,44 @@
             <p><a href="/disclaimer.html">Affiliate Disclosure</a> &bull; Amazon Associates participant</p>
         </div>
     </footer>
+
+<script>
+(function() {
+  var pills = document.querySelectorAll('.cat-pill[data-filter]');
+  var allCards = document.querySelectorAll('.card[data-category]');
+
+  pills.forEach(function(pill) {
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      var filter = this.getAttribute('data-filter');
+
+      // Update active pill
+      pills.forEach(function(p) { p.classList.remove('active'); });
+      this.classList.add('active');
+
+      // Show/hide cards
+      allCards.forEach(function(card) {
+        if (filter === 'all') {
+          card.style.display = '';
+        } else {
+          var cats = card.getAttribute('data-category').split(' ');
+          card.style.display = cats.indexOf(filter) !== -1 ? '' : 'none';
+        }
+      });
+
+      // Show/hide section heads based on whether next grid has visible cards
+      document.querySelectorAll('.section-head').forEach(function(sh) {
+        var grid = sh.nextElementSibling;
+        if (!grid) return;
+        var visible = Array.from(grid.querySelectorAll('.card')).some(function(c) {
+          return c.style.display !== 'none';
+        });
+        sh.style.display = visible ? '' : 'none';
+        grid.style.display = visible ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
