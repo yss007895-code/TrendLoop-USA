@@ -157,14 +157,15 @@ def update_sitemap(all_slugs: list[str]) -> None:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
 
-    urls_xml = ""
+    urls_list = []
     for slug in all_slugs:
-        urls_xml += f"""  <url>
+        urls_list.append(f"""  <url>
     <loc>{BLOG_BASE_URL}/{slug}.html</loc>
     <lastmod>{today}</lastmod>
     <changefreq>daily</changefreq>
   </url>
-"""
+""")
+    urls_xml = "".join(urls_list)
 
     sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
