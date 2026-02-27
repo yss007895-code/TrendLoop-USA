@@ -11,6 +11,7 @@ safety.py - 파일 보호 + 비상 복구 + 실행 보고 시스템
 import os
 import shutil
 import time
+import threading
 from datetime import datetime, timezone
 
 
@@ -38,23 +39,29 @@ class UsageTracker:
             "other": 0,
         }
         self.consecutive_errors = 0
+        self.lock = threading.Lock()
 
     def log_api_call(self, service: str):
         """API 호출 1회 기록"""
-        if service in self.api_calls:
-            self.api_calls[service] += 1
-        self.consecutive_errors = 0  # 성공이면 리셋
+        with self.lock:
+            if service in self.api_calls:
+                self.api_calls[service] += 1
+            self.consecutive_errors = 0  # 성공이면 리셋
 
     def log_error(self, service: str):
         """에러 1회 기록"""
-        if service in self.errors:
-            self.errors[service] += 1
-        self.consecutive_errors += 1
+        with self.lock:
+            if service in self.errors:
+                self.errors[service] += 1
+            self.consecutive_errors += 1
 
     def is_abnormal(self, max_consecutive: int = 3) -> bool:
         """비정상 동작 여부 판단"""
-        total_calls = sum(self.api_calls.values())
-        if self.consecutive_errors >= max_consecutive:
+        with self.lock:
+            total_calls = sum(self.api_calls.values())
+            current_consecutive = self.consecutive_errors
+
+        if current_consecutive >= max_consecutive:
             return True
         if total_calls > 50:  # 하루 50회 이상이면 비정상
             return True
@@ -62,9 +69,11 @@ class UsageTracker:
 
     def print_report(self):
         """실행 보고서를 출력합니다."""
-        elapsed = time.time() - self.start_time
-        total_calls = sum(self.api_calls.values())
-        total_errors = sum(self.errors.values())
+        with self.lock:
+            elapsed = time.time() - self.start_time
+            total_calls = sum(self.api_calls.values())
+            total_errors = sum(self.errors.values())
+            api_calls_copy = self.api_calls.copy()
 
         print()
         print("=" * 60)
@@ -75,13 +84,13 @@ class UsageTracker:
         print(f"  총 에러:           {total_errors}회")
         print()
         print("  [호출 상세]")
-        for service, count in self.api_calls.items():
+        for service, count in api_calls_copy.items():
             if count > 0:
                 print(f"    {service}: {count}회")
         print()
         print("  [비용 추정]")
-        print(f"    Gemini API:      {self.api_calls['gemini']}회 (무료 티어 내)")
-        print(f"    Twitter API:     {self.api_calls['twitter_read'] + self.api_calls['twitter_write']}회 (무료 티어 내)")
+        print(f"    Gemini API:      {api_calls_copy['gemini']}회 (무료 티어 내)")
+        print(f"    Twitter API:     {api_calls_copy['twitter_read'] + api_calls_copy['twitter_write']}회 (무료 티어 내)")
         print(f"    서버 비용:       $0 (GitHub Actions ephemeral)")
         print("=" * 60)
 

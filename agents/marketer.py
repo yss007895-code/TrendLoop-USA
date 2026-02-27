@@ -7,6 +7,7 @@
 
 import requests
 import tweepy
+import concurrent.futures
 from config import (
     X_API_KEY,
     X_API_SECRET,
@@ -96,9 +97,39 @@ def ping_google_indexing(slug: str) -> bool:
     return success
 
 
+def _send_distribution_request(channel: dict, payload: dict) -> bool:
+    """단일 채널 배포 요청을 처리하는 헬퍼 함수"""
+    name = channel.get("name", "unknown")
+    api_key = channel.get("api_key", "")
+    endpoint = channel.get("endpoint", "")
+
+    if not endpoint or not api_key:
+        print(f"[마케터] 채널 '{name}' 설정 불완전. 건너뜁니다.")
+        return False
+
+    try:
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+        resp = requests.post(endpoint, json=payload, headers=headers, timeout=15)
+        tracker.log_api_call("twitter_write")
+
+        if resp.status_code in (200, 201, 202):
+            print(f"[마케터] 채널 '{name}' 배포 성공!")
+            return True
+        else:
+            print(f"[마케터] 채널 '{name}' 응답 코드: {resp.status_code}")
+            return False
+    except requests.RequestException as e:
+        tracker.log_error("other")
+        print(f"[마케터] 채널 '{name}' 배포 실패: {e}")
+        return False
+
+
 def distribute_to_channels(title: str, summary: str, slug: str) -> int:
     """
-    멀티 채널 배포 엔진
+    멀티 채널 배포 엔진 (병렬 처리)
     환경 변수 DISTRIBUTION_CHANNELS에 등록된 채널들로 콘텐츠를 배포합니다.
 
     채널 JSON 형식:
@@ -115,36 +146,22 @@ def distribute_to_channels(title: str, summary: str, slug: str) -> int:
     blog_url = f"{BLOG_BASE_URL}/{slug}.html"
     success_count = 0
 
-    for ch in channels:
-        name = ch.get("name", "unknown")
-        api_key = ch.get("api_key", "")
-        endpoint = ch.get("endpoint", "")
+    payload = {
+        "title": title,
+        "summary": summary,
+        "url": blog_url,
+    }
 
-        if not endpoint or not api_key:
-            print(f"[마케터] 채널 '{name}' 설정 불완전. 건너뜁니다.")
-            continue
+    # 스레드 풀을 사용하여 병렬 배포
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        future_to_channel = {
+            executor.submit(_send_distribution_request, ch, payload): ch
+            for ch in channels
+        }
 
-        try:
-            payload = {
-                "title": title,
-                "summary": summary,
-                "url": blog_url,
-            }
-            headers = {
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-            }
-            resp = requests.post(endpoint, json=payload, headers=headers, timeout=15)
-            tracker.log_api_call("twitter_write")
-
-            if resp.status_code in (200, 201, 202):
-                print(f"[마케터] 채널 '{name}' 배포 성공!")
+        for future in concurrent.futures.as_completed(future_to_channel):
+            if future.result():
                 success_count += 1
-            else:
-                print(f"[마케터] 채널 '{name}' 응답 코드: {resp.status_code}")
-        except requests.RequestException as e:
-            tracker.log_error("other")
-            print(f"[마케터] 채널 '{name}' 배포 실패: {e}")
 
     print(f"[마케터] 멀티 채널 배포 결과: {success_count}/{len(channels)} 성공")
     return success_count
