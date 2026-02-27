@@ -6,6 +6,7 @@
 """
 
 import re
+import concurrent.futures
 from collections import Counter
 import tweepy
 from config import (
@@ -37,6 +38,28 @@ STOP_WORDS = {
 }
 
 
+def _fetch_tweets(client, query):
+    """
+    단일 쿼리에 대해 트윗을 검색하는 헬퍼 함수.
+    성공 시 (query, tweets) 튜플 반환.
+    실패 시 예외를 발생시킴.
+    """
+    try:
+        search_query = f"{query} lang:en -is:retweet"
+        # client.search_recent_tweets() - 최근 7일 트윗 검색
+        response = client.search_recent_tweets(
+            query=search_query,
+            max_results=20,
+            tweet_fields=["text", "entities"],
+        )
+        return response
+    except Exception as e:
+        # 호출한 곳에서 처리하도록 예외를 그대로 던지거나,
+        # (query, exception) 형태로 반환할 수도 있음.
+        # 여기서는 예외를 던져서 호출부에서 처리하도록 함.
+        raise e
+
+
 def fetch_trending_keywords() -> list[dict]:
     """X API v2로 패션 트렌드 키워드를 추출합니다."""
     if not X_BEARER_TOKEN:
@@ -49,36 +72,53 @@ def fetch_trending_keywords() -> list[dict]:
     all_texts: list[str] = []
     all_hashtags: list[str] = []
 
-    for query in FASHION_SEED_QUERIES:
-        if tracker.is_abnormal(MAX_CONSECUTIVE_ERRORS):
-            print(f"[분석가] 비정상 동작 감지. 검색을 중단합니다.")
-            break
+    # 작업 실행을 위한 Executor 생성
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        # Future 객체를 키로, 쿼리를 값으로 저장하는 딕셔너리
+        future_to_query = {
+            executor.submit(_fetch_tweets, client, query): query
+            for query in FASHION_SEED_QUERIES
+        }
 
-        try:
-            search_query = f"{query} lang:en -is:retweet"
-            # client.search_recent_tweets() - 최근 7일 트윗 검색
-            response = client.search_recent_tweets(
-                query=search_query,
-                max_results=20,
-                tweet_fields=["text", "entities"],
-            )
-            tracker.log_api_call("twitter_read")
+        # 완료된 작업부터 순차적으로 처리
+        for future in concurrent.futures.as_completed(future_to_query):
+            query = future_to_query[future]
 
-            if response.data:
-                for tweet in response.data:
-                    all_texts.append(tweet.text)
-                    if tweet.entities and "hashtags" in tweet.entities:
-                        for tag in tweet.entities["hashtags"]:
-                            all_hashtags.append(tag["tag"].lower())
+            # 안전장치 체크
+            if tracker.is_abnormal(MAX_CONSECUTIVE_ERRORS):
+                print(f"[분석가] 비정상 동작 감지. 검색을 중단합니다.")
+                # 진행 중인 작업 취소 시도 (실행 중이 아닌 작업만 취소됨)
+                for f in future_to_query:
+                    f.cancel()
+                break
 
-        except tweepy.TooManyRequests:
-            print("[분석가] API 호출 제한 도달. 수집된 데이터로 진행합니다.")
-            tracker.log_error("twitter")
-            break
-        except tweepy.TweepyException as e:
-            tracker.log_error("twitter")
-            print(f"[분석가] 검색 오류 ({query}): {e}")
-            continue
+            try:
+                # 결과 가져오기 (예외 발생 시 여기서 raise됨)
+                response = future.result()
+                tracker.log_api_call("twitter_read")
+
+                if response.data:
+                    for tweet in response.data:
+                        all_texts.append(tweet.text)
+                        if tweet.entities and "hashtags" in tweet.entities:
+                            for tag in tweet.entities["hashtags"]:
+                                all_hashtags.append(tag["tag"].lower())
+
+            except tweepy.TooManyRequests:
+                print("[분석가] API 호출 제한 도달. 수집된 데이터로 진행합니다.")
+                tracker.log_error("twitter")
+                # 더 이상 요청하지 않도록 남은 작업 취소
+                for f in future_to_query:
+                    f.cancel()
+                break
+            except tweepy.TweepyException as e:
+                tracker.log_error("twitter")
+                print(f"[분석가] 검색 오류 ({query}): {e}")
+                continue
+            except Exception as e:
+                tracker.log_error("other")
+                print(f"[분석가] 알 수 없는 오류 ({query}): {e}")
+                continue
 
     if not all_texts and not all_hashtags:
         print("[분석가] 트윗을 가져오지 못했습니다. 기본 키워드를 사용합니다.")
