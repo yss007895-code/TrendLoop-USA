@@ -51,6 +51,10 @@ def _make_amazon_link(keyword: str) -> str:
 
 def generate_blog_post(keywords: list[dict]) -> dict:
     """키워드 → Gemini로 블로그 글 생성 → HTML 파일 저장"""
+    if not keywords:
+        print("[작가] 키워드가 없습니다.")
+        return {}
+
     if not GEMINI_API_KEY:
         print("[작가] 오류: GEMINI_API_KEY가 설정되지 않았습니다.")
         return {}
