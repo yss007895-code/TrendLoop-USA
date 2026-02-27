@@ -150,12 +150,13 @@ def distribute_to_channels(title: str, summary: str, slug: str) -> int:
     return success_count
 
 
-def update_sitemap(all_slugs: list[str]) -> None:
+def update_sitemap(all_slugs: list[str], output_dir: str = None) -> None:
     import os
     from datetime import datetime, timezone
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
+    if output_dir is None:
+        output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
 
     urls_xml = ""
     for slug in all_slugs:
