@@ -9,6 +9,7 @@ import os
 import re
 from datetime import datetime, timezone
 from urllib.parse import quote_plus
+import bleach
 from google import genai  # google-genai 패키지 (신규)
 from config import GEMINI_API_KEY, AMAZON_TAG, GEMINI_DAILY_CALL_LIMIT
 from safety import tracker
@@ -123,7 +124,8 @@ Tweet:"""
     if not summary:
         summary = f"New fashion trends alert! {', '.join(keyword_names[:3])} #Fashion #Trending"
 
-    full_html = _wrap_in_html_page(title, article_html, today)
+    clean_article_html = _sanitize_html(article_html)
+    full_html = _wrap_in_html_page(title, clean_article_html, today)
 
     output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
     os.makedirs(output_dir, exist_ok=True)
@@ -145,6 +147,25 @@ Tweet:"""
         "summary": summary,
         "file_path": file_path,
     }
+
+
+def _sanitize_html(html_content: str) -> str:
+    """Sanitize HTML content to prevent XSS attacks."""
+    allowed_tags = [
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        'p', 'ul', 'ol', 'li', 'strong', 'em', 'b', 'i',
+        'a', 'br', 'div', 'span', 'blockquote'
+    ]
+    allowed_attrs = {
+        'a': ['href', 'title', 'target', 'rel'],
+    }
+
+    return bleach.clean(
+        html_content,
+        tags=allowed_tags,
+        attributes=allowed_attrs,
+        strip=True
+    )
 
 
 def _wrap_in_html_page(title: str, article_html: str, date: str) -> str:
