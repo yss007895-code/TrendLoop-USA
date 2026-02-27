@@ -7,6 +7,7 @@
 
 import requests
 import tweepy
+import concurrent.futures
 from config import (
     X_API_KEY,
     X_API_SECRET,
@@ -96,6 +97,34 @@ def ping_google_indexing(slug: str) -> bool:
     return success
 
 
+def _send_to_channel(channel: dict, title: str, summary: str, blog_url: str):
+    """
+    개별 채널에 배포 요청을 보냅니다. (Concurrent execution helper)
+    Returns: (channel_name, response_object_or_None, error_or_None)
+    """
+    name = channel.get("name", "unknown")
+    api_key = channel.get("api_key", "")
+    endpoint = channel.get("endpoint", "")
+
+    if not endpoint or not api_key:
+        return name, None, "config_incomplete"
+
+    try:
+        payload = {
+            "title": title,
+            "summary": summary,
+            "url": blog_url,
+        }
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+        resp = requests.post(endpoint, json=payload, headers=headers, timeout=15)
+        return name, resp, None
+    except requests.RequestException as e:
+        return name, None, e
+
+
 def distribute_to_channels(title: str, summary: str, slug: str) -> int:
     """
     멀티 채널 배포 엔진
@@ -115,36 +144,35 @@ def distribute_to_channels(title: str, summary: str, slug: str) -> int:
     blog_url = f"{BLOG_BASE_URL}/{slug}.html"
     success_count = 0
 
-    for ch in channels:
-        name = ch.get("name", "unknown")
-        api_key = ch.get("api_key", "")
-        endpoint = ch.get("endpoint", "")
+    # ThreadPoolExecutor를 사용하여 병렬 처리
+    # max_workers를 채널 수와 10 중 작은 값으로 제한하여 리소스 관리
+    max_workers = min(len(channels), 10)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_channel = {
+            executor.submit(_send_to_channel, ch, title, summary, blog_url): ch
+            for ch in channels
+        }
 
-        if not endpoint or not api_key:
-            print(f"[마케터] 채널 '{name}' 설정 불완전. 건너뜁니다.")
-            continue
+        for future in concurrent.futures.as_completed(future_to_channel):
+            name, response, error = future.result()
 
-        try:
-            payload = {
-                "title": title,
-                "summary": summary,
-                "url": blog_url,
-            }
-            headers = {
-                "Authorization": f"Bearer {api_key}",
-                "Content-Type": "application/json",
-            }
-            resp = requests.post(endpoint, json=payload, headers=headers, timeout=15)
-            tracker.log_api_call("twitter_write")
+            if error == "config_incomplete":
+                print(f"[마케터] 채널 '{name}' 설정 불완전. 건너뜁니다.")
+                continue
 
-            if resp.status_code in (200, 201, 202):
-                print(f"[마케터] 채널 '{name}' 배포 성공!")
-                success_count += 1
-            else:
-                print(f"[마케터] 채널 '{name}' 응답 코드: {resp.status_code}")
-        except requests.RequestException as e:
-            tracker.log_error("other")
-            print(f"[마케터] 채널 '{name}' 배포 실패: {e}")
+            if response is not None:
+                # 성공이든 실패든 응답을 받았으므로 API 호출로 기록 (기존 로직 유지)
+                tracker.log_api_call("twitter_write")
+
+                if response.status_code in (200, 201, 202):
+                    print(f"[마케터] 채널 '{name}' 배포 성공!")
+                    success_count += 1
+                else:
+                    print(f"[마케터] 채널 '{name}' 응답 코드: {response.status_code}")
+            elif error:
+                # 네트워크 오류 등 예외 발생 시
+                tracker.log_error("other")
+                print(f"[마케터] 채널 '{name}' 배포 실패: {error}")
 
     print(f"[마케터] 멀티 채널 배포 결과: {success_count}/{len(channels)} 성공")
     return success_count
