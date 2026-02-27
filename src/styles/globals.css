@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  body {
+    @apply bg-cream text-gray-700 font-body;
+  }
+  ::selection {
+    @apply bg-blush-200 text-blush-700;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm;
+  }
+  .card-hover {
+    @apply card hover:border-gray-200 hover:shadow-md transition-all duration-300;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-blush-500 to-purple-500 bg-clip-text text-transparent;
+  }
+  .btn-primary {
+    @apply bg-gray-900 text-white font-body font-semibold px-6 py-3 rounded-xl hover:bg-gray-800 transition-all duration-200;
+  }
+  .btn-secondary {
+    @apply bg-white border border-gray-200 text-gray-600 font-body font-semibold px-6 py-3 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200;
+  }
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-new {
+    @apply badge bg-gray-50 text-gray-600 border border-gray-200;
+  }
+  .badge-hot {
+    @apply badge bg-rose-50 text-rose-600 border border-rose-100;
+  }
+  .badge-category {
+    @apply badge bg-gray-50 text-gray-500 border border-gray-200;
+  }
+  .section-title {
+    @apply font-display text-2xl sm:text-3xl font-bold text-gray-900;
+  }
+
+  /* Product card styles */
+  .product-card {
+    @apply bg-white rounded-xl border border-gray-100 overflow-hidden transition-all duration-300;
+  }
+  .product-card:hover {
+    @apply border-gray-200 shadow-md;
+  }
+  .product-card:hover .product-card-action {
+    @apply opacity-100;
+  }
+  .price-current {
+    @apply font-mono font-bold text-gray-900;
+  }
+  .price-original {
+    @apply font-mono text-gray-400 line-through text-sm;
+  }
+  .urgency-text {
+    @apply text-xs text-rose-600 font-medium;
+  }
+
+  /* Tab styles */
+  .tab-active {
+    @apply text-gray-900 border-b-2 border-gray-900;
+  }
+  .tab-inactive {
+    @apply text-gray-400 hover:text-gray-600 border-b-2 border-transparent;
+  }
+
+  .prose-style h2 {
+    @apply font-display text-2xl font-bold text-gray-900 mt-10 mb-4;
+  }
+  .prose-style h3 {
+    @apply font-display text-xl font-semibold text-gray-800 mt-8 mb-3;
+  }
+  .prose-style p {
+    @apply text-gray-600 leading-relaxed mb-4;
+  }
+  .prose-style a {
+    @apply text-gray-900 hover:text-blush-600 underline underline-offset-2;
+  }
+  .prose-style blockquote {
+    @apply border-l-4 border-gray-200 bg-gray-50 px-6 py-4 rounded-r-xl my-6 italic;
+  }
+  .prose-style table {
+    @apply w-full border-collapse mb-6;
+  }
+  .prose-style th {
+    @apply bg-gray-50 text-gray-700 font-mono text-sm font-semibold px-4 py-3 text-left border-b-2 border-gray-200;
+  }
+  .prose-style td {
+    @apply px-4 py-3 text-sm text-gray-600 border-b border-gray-100;
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Better focus visibility for keyboard navigation */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-blush-500;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Skip to content link for screen readers */
+.skip-link {
+  @apply absolute -top-10 left-4 bg-gray-900 text-white px-4 py-2 rounded-b-lg z-[100] text-sm font-medium;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  @apply top-0;
+}
