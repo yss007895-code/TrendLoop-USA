@@ -49,19 +49,16 @@ def _make_amazon_link(keyword: str) -> str:
     return f"https://www.amazon.com/s?k={encoded}&tag={AMAZON_TAG}"
 
 
-def generate_blog_post(keywords: list[dict]) -> dict:
-    """키워드 → Gemini로 블로그 글 생성 → HTML 파일 저장"""
-    if not GEMINI_API_KEY:
-        print("[작가] 오류: GEMINI_API_KEY가 설정되지 않았습니다.")
-        return {}
-
+def _prepare_amazon_links(keywords: list[dict]) -> tuple[list[str], str]:
+    """키워드 이름 목록과 아마존 링크 텍스트를 준비합니다."""
     keyword_names = [kw["keyword"] for kw in keywords]
     amazon_links = {kw: _make_amazon_link(kw) for kw in keyword_names}
     links_text = "\n".join(f"- {kw}: {url}" for kw, url in amazon_links.items())
+    return keyword_names, links_text
 
-    # genai.Client() - API 키 기반 인증
-    client = genai.Client(api_key=GEMINI_API_KEY)
 
+def _generate_article_content(client, keyword_names: list[str], links_text: str) -> str:
+    """Gemini API를 사용하여 블로그 글 본문을 생성합니다."""
     prompt = f"""You are a professional fashion blogger writing for a US audience.
 
 Write an engaging, SEO-optimized blog post about today's hottest fashion trends.
@@ -87,13 +84,15 @@ Write the blog post now:"""
 
     try:
         article_html = _call_gemini(client, prompt)
-        if not article_html:
-            return {}
+        return article_html if article_html else ""
     except Exception as e:
         print(f"[작가] Gemini API 오류: {e}")
         tracker.log_error("gemini")
-        return {}
+        return ""
 
+
+def _extract_metadata(article_html: str, keyword_names: list[str]) -> tuple[str, str, str]:
+    """기사 HTML에서 제목을 추출하고 슬러그 및 날짜를 생성합니다."""
     # 제목 추출
     title_match = re.search(r"<h1[^>]*>(.*?)</h1>", article_html, re.IGNORECASE)
     title = title_match.group(1) if title_match else f"Fashion Trends: {keyword_names[0].title()}"
@@ -104,7 +103,11 @@ Write the blog post now:"""
     slug_base = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:50]
     slug = f"{today}-{slug_base}"
 
-    # 트위터 요약
+    return title, slug, today
+
+
+def _generate_summary(client, title: str, keyword_names: list[str]) -> str:
+    """블로그 글의 트위터용 요약을 생성합니다."""
     summary_prompt = f"""Summarize this fashion blog post title in a compelling tweet (max 250 chars).
 Include 2-3 relevant hashtags. Do NOT use markdown.
 
@@ -123,14 +126,49 @@ Tweet:"""
     if not summary:
         summary = f"New fashion trends alert! {', '.join(keyword_names[:3])} #Fashion #Trending"
 
-    full_html = _wrap_in_html_page(title, article_html, today)
+    return summary
 
+
+def _save_to_file(slug: str, full_html: str) -> str:
+    """완성된 HTML을 파일로 저장합니다."""
     output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
     os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, f"{slug}.html")
 
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(full_html)
+
+    return file_path
+
+
+def generate_blog_post(keywords: list[dict]) -> dict:
+    """키워드 → Gemini로 블로그 글 생성 → HTML 파일 저장"""
+    if not GEMINI_API_KEY:
+        print("[작가] 오류: GEMINI_API_KEY가 설정되지 않았습니다.")
+        return {}
+
+    # 1. 키워드 및 링크 준비
+    keyword_names, links_text = _prepare_amazon_links(keywords)
+
+    # genai.Client() - API 키 기반 인증
+    client = genai.Client(api_key=GEMINI_API_KEY)
+
+    # 2. 본문 생성
+    article_html = _generate_article_content(client, keyword_names, links_text)
+    if not article_html:
+        return {}
+
+    # 3. 메타데이터 추출 (제목, 슬러그, 날짜)
+    title, slug, today = _extract_metadata(article_html, keyword_names)
+
+    # 4. 요약 생성
+    summary = _generate_summary(client, title, keyword_names)
+
+    # 5. HTML 페이지 포장
+    full_html = _wrap_in_html_page(title, article_html, today)
+
+    # 6. 파일 저장
+    file_path = _save_to_file(slug, full_html)
 
     print(f"[작가] 블로그 글 생성 완료!")
     print(f"  - 제목: {title}")
