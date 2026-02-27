@@ -55,6 +55,10 @@ def generate_blog_post(keywords: list[dict]) -> dict:
         print("[작가] 오류: GEMINI_API_KEY가 설정되지 않았습니다.")
         return {}
 
+    if not keywords:
+        print("[작가] 오류: 키워드 리스트가 비어있습니다.")
+        return {}
+
     keyword_names = [kw["keyword"] for kw in keywords]
     amazon_links = {kw: _make_amazon_link(kw) for kw in keyword_names}
     links_text = "\n".join(f"- {kw}: {url}" for kw, url in amazon_links.items())
