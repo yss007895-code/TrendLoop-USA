@@ -7,6 +7,7 @@
 
 import re
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import tweepy
 from config import (
     X_BEARER_TOKEN,
@@ -37,6 +38,34 @@ STOP_WORDS = {
 }
 
 
+def _fetch_query_data(client, query):
+    """개별 쿼리에 대한 트윗 검색을 수행합니다 (스레드 실행용)."""
+    try:
+        search_query = f"{query} lang:en -is:retweet"
+        # client.search_recent_tweets() - 최근 7일 트윗 검색
+        response = client.search_recent_tweets(
+            query=search_query,
+            max_results=20,
+            tweet_fields=["text", "entities"],
+        )
+
+        texts = []
+        hashtags = []
+
+        if response.data:
+            for tweet in response.data:
+                texts.append(tweet.text)
+                if tweet.entities and "hashtags" in tweet.entities:
+                    for tag in tweet.entities["hashtags"]:
+                        hashtags.append(tag["tag"].lower())
+
+        return (texts, hashtags, None)
+    except tweepy.TooManyRequests:
+        return ([], [], "TooManyRequests")
+    except tweepy.TweepyException as e:
+        return ([], [], e)
+
+
 def fetch_trending_keywords() -> list[dict]:
     """X API v2로 패션 트렌드 키워드를 추출합니다."""
     if not X_BEARER_TOKEN:
@@ -49,36 +78,43 @@ def fetch_trending_keywords() -> list[dict]:
     all_texts: list[str] = []
     all_hashtags: list[str] = []
 
-    for query in FASHION_SEED_QUERIES:
-        if tracker.is_abnormal(MAX_CONSECUTIVE_ERRORS):
-            print(f"[분석가] 비정상 동작 감지. 검색을 중단합니다.")
-            break
+    # 시작 전 비정상 상태 체크
+    if tracker.is_abnormal(MAX_CONSECUTIVE_ERRORS):
+        print(f"[분석가] 비정상 동작 감지. 검색을 중단합니다.")
+        return _fallback_keywords()
 
-        try:
-            search_query = f"{query} lang:en -is:retweet"
-            # client.search_recent_tweets() - 최근 7일 트윗 검색
-            response = client.search_recent_tweets(
-                query=search_query,
-                max_results=20,
-                tweet_fields=["text", "entities"],
-            )
-            tracker.log_api_call("twitter_read")
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_query = {executor.submit(_fetch_query_data, client, query): query for query in FASHION_SEED_QUERIES}
 
-            if response.data:
-                for tweet in response.data:
-                    all_texts.append(tweet.text)
-                    if tweet.entities and "hashtags" in tweet.entities:
-                        for tag in tweet.entities["hashtags"]:
-                            all_hashtags.append(tag["tag"].lower())
+        for future in as_completed(future_to_query):
+            query = future_to_query[future]
 
-        except tweepy.TooManyRequests:
-            print("[분석가] API 호출 제한 도달. 수집된 데이터로 진행합니다.")
-            tracker.log_error("twitter")
-            break
-        except tweepy.TweepyException as e:
-            tracker.log_error("twitter")
-            print(f"[분석가] 검색 오류 ({query}): {e}")
-            continue
+            # 결과 처리 중에도 비정상 상태 체크
+            if tracker.is_abnormal(MAX_CONSECUTIVE_ERRORS):
+                print(f"[분석가] 비정상 동작 감지. 검색을 중단합니다.")
+                break
+
+            try:
+                texts, tags, error = future.result()
+
+                if error == "TooManyRequests":
+                    print("[분석가] API 호출 제한 도달. 수집된 데이터로 진행합니다.")
+                    tracker.log_error("twitter")
+                    break  # 더 이상 결과 처리하지 않음
+
+                if error:
+                    tracker.log_error("twitter")
+                    print(f"[분석가] 검색 오류 ({query}): {error}")
+                    continue
+
+                # 성공
+                tracker.log_api_call("twitter_read")
+                all_texts.extend(texts)
+                all_hashtags.extend(tags)
+
+            except Exception as e:
+                print(f"[분석가] 예상치 못한 오류 ({query}): {e}")
+                tracker.log_error("twitter")
 
     if not all_texts and not all_hashtags:
         print("[분석가] 트윗을 가져오지 못했습니다. 기본 키워드를 사용합니다.")
