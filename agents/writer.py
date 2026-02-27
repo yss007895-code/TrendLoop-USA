@@ -90,7 +90,7 @@ Write the blog post now:"""
         if not article_html:
             return {}
     except Exception as e:
-        print(f"[작가] Gemini API 오류: {e}")
+        print(f"[작가] Gemini API 오류: {type(e).__name__}")
         tracker.log_error("gemini")
         return {}
 
