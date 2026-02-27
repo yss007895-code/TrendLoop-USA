@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from config import MAX_TOTAL_RUNTIME_SECONDS, MAX_CONSECUTIVE_ERRORS
 from safety import tracker, create_backup, print_recovery_commands
 from agents.analyst import fetch_trending_keywords
-from agents.writer import generate_blog_post
+from agents.writer import WriterAgent
 from agents.marketer import post_to_twitter, ping_google_indexing, update_sitemap
 
 
@@ -104,7 +104,8 @@ def main():
     print("[STEP 2] 에이전트 B (작가) - 블로그 글 작성 중...")
     print("-" * 40)
     try:
-        blog = generate_blog_post(keywords)
+        writer = WriterAgent()
+        blog = writer.generate_blog_post(keywords)
     except Exception as e:
         print(f"[STEP 2 오류] {e}")
         tracker.log_error("gemini")

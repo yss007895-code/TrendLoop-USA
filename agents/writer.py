@@ -14,55 +14,51 @@ from config import GEMINI_API_KEY, AMAZON_TAG, GEMINI_DAILY_CALL_LIMIT
 from safety import tracker
 
 
-_gemini_call_count = 0
+class WriterAgent:
+    def __init__(self):
+        self.gemini_call_count = 0
 
+    def _check_gemini_limit(self) -> bool:
+        if self.gemini_call_count >= GEMINI_DAILY_CALL_LIMIT:
+            print(f"[작가] Gemini API 일일 한도 {GEMINI_DAILY_CALL_LIMIT}회 도달. 추가 호출 차단.")
+            return False
+        return True
 
-def _check_gemini_limit() -> bool:
-    global _gemini_call_count
-    if _gemini_call_count >= GEMINI_DAILY_CALL_LIMIT:
-        print(f"[작가] Gemini API 일일 한도 {GEMINI_DAILY_CALL_LIMIT}회 도달. 추가 호출 차단.")
-        return False
-    return True
+    def _call_gemini(self, client, prompt: str) -> str:
+        """Gemini API 호출 + 사용량 기록"""
 
+        if not self._check_gemini_limit():
+            return ""
 
-def _call_gemini(client, prompt: str) -> str:
-    """Gemini API 호출 + 사용량 기록"""
-    global _gemini_call_count
+        self.gemini_call_count += 1
+        print(f"[작가] Gemini API 호출 {self.gemini_call_count}/{GEMINI_DAILY_CALL_LIMIT}")
 
-    if not _check_gemini_limit():
-        return ""
+        # client.models.generate_content() - Gemini API v1 텍스트 생성
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+        )
+        tracker.log_api_call("gemini")
+        return response.text
 
-    _gemini_call_count += 1
-    print(f"[작가] Gemini API 호출 {_gemini_call_count}/{GEMINI_DAILY_CALL_LIMIT}")
+    def _make_amazon_link(self, keyword: str) -> str:
+        encoded = quote_plus(keyword)
+        return f"https://www.amazon.com/s?k={encoded}&tag={AMAZON_TAG}"
 
-    # client.models.generate_content() - Gemini API v1 텍스트 생성
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-    )
-    tracker.log_api_call("gemini")
-    return response.text
+    def generate_blog_post(self, keywords: list[dict]) -> dict:
+        """키워드 → Gemini로 블로그 글 생성 → HTML 파일 저장"""
+        if not GEMINI_API_KEY:
+            print("[작가] 오류: GEMINI_API_KEY가 설정되지 않았습니다.")
+            return {}
 
+        keyword_names = [kw["keyword"] for kw in keywords]
+        amazon_links = {kw: self._make_amazon_link(kw) for kw in keyword_names}
+        links_text = "\n".join(f"- {kw}: {url}" for kw, url in amazon_links.items())
 
-def _make_amazon_link(keyword: str) -> str:
-    encoded = quote_plus(keyword)
-    return f"https://www.amazon.com/s?k={encoded}&tag={AMAZON_TAG}"
+        # genai.Client() - API 키 기반 인증
+        client = genai.Client(api_key=GEMINI_API_KEY)
 
-
-def generate_blog_post(keywords: list[dict]) -> dict:
-    """키워드 → Gemini로 블로그 글 생성 → HTML 파일 저장"""
-    if not GEMINI_API_KEY:
-        print("[작가] 오류: GEMINI_API_KEY가 설정되지 않았습니다.")
-        return {}
-
-    keyword_names = [kw["keyword"] for kw in keywords]
-    amazon_links = {kw: _make_amazon_link(kw) for kw in keyword_names}
-    links_text = "\n".join(f"- {kw}: {url}" for kw, url in amazon_links.items())
-
-    # genai.Client() - API 키 기반 인증
-    client = genai.Client(api_key=GEMINI_API_KEY)
-
-    prompt = f"""You are a professional fashion blogger writing for a US audience.
+        prompt = f"""You are a professional fashion blogger writing for a US audience.
 
 Write an engaging, SEO-optimized blog post about today's hottest fashion trends.
 
@@ -85,27 +81,27 @@ Write an engaging, SEO-optimized blog post about today's hottest fashion trends.
 
 Write the blog post now:"""
 
-    try:
-        article_html = _call_gemini(client, prompt)
-        if not article_html:
+        try:
+            article_html = self._call_gemini(client, prompt)
+            if not article_html:
+                return {}
+        except Exception as e:
+            print(f"[작가] Gemini API 오류: {e}")
+            tracker.log_error("gemini")
             return {}
-    except Exception as e:
-        print(f"[작가] Gemini API 오류: {e}")
-        tracker.log_error("gemini")
-        return {}
 
-    # 제목 추출
-    title_match = re.search(r"<h1[^>]*>(.*?)</h1>", article_html, re.IGNORECASE)
-    title = title_match.group(1) if title_match else f"Fashion Trends: {keyword_names[0].title()}"
-    title = re.sub(r"<[^>]+>", "", title)
+        # 제목 추출
+        title_match = re.search(r"<h1[^>]*>(.*?)</h1>", article_html, re.IGNORECASE)
+        title = title_match.group(1) if title_match else f"Fashion Trends: {keyword_names[0].title()}"
+        title = re.sub(r"<[^>]+>", "", title)
 
-    # URL 슬러그
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    slug_base = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:50]
-    slug = f"{today}-{slug_base}"
+        # URL 슬러그
+        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        slug_base = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:50]
+        slug = f"{today}-{slug_base}"
 
-    # 트위터 요약
-    summary_prompt = f"""Summarize this fashion blog post title in a compelling tweet (max 250 chars).
+        # 트위터 요약
+        summary_prompt = f"""Summarize this fashion blog post title in a compelling tweet (max 250 chars).
 Include 2-3 relevant hashtags. Do NOT use markdown.
 
 Title: {title}
@@ -113,42 +109,41 @@ Keywords: {', '.join(keyword_names)}
 
 Tweet:"""
 
-    try:
-        summary = _call_gemini(client, summary_prompt)
-        summary = summary.strip()[:250] if summary else ""
-    except Exception:
-        tracker.log_error("gemini")
-        summary = ""
+        try:
+            summary = self._call_gemini(client, summary_prompt)
+            summary = summary.strip()[:250] if summary else ""
+        except Exception:
+            tracker.log_error("gemini")
+            summary = ""
 
-    if not summary:
-        summary = f"New fashion trends alert! {', '.join(keyword_names[:3])} #Fashion #Trending"
+        if not summary:
+            summary = f"New fashion trends alert! {', '.join(keyword_names[:3])} #Fashion #Trending"
 
-    full_html = _wrap_in_html_page(title, article_html, today)
+        full_html = self._wrap_in_html_page(title, article_html, today)
 
-    output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
-    os.makedirs(output_dir, exist_ok=True)
-    file_path = os.path.join(output_dir, f"{slug}.html")
+        output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
+        os.makedirs(output_dir, exist_ok=True)
+        file_path = os.path.join(output_dir, f"{slug}.html")
 
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write(full_html)
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(full_html)
 
-    print(f"[작가] 블로그 글 생성 완료!")
-    print(f"  - 제목: {title}")
-    print(f"  - 파일: {file_path}")
-    print(f"  - 요약: {summary}")
-    print(f"  - Gemini API 총 호출: {_gemini_call_count}회")
+        print(f"[작가] 블로그 글 생성 완료!")
+        print(f"  - 제목: {title}")
+        print(f"  - 파일: {file_path}")
+        print(f"  - 요약: {summary}")
+        print(f"  - Gemini API 총 호출: {self.gemini_call_count}회")
 
-    return {
-        "title": title,
-        "slug": slug,
-        "html": full_html,
-        "summary": summary,
-        "file_path": file_path,
-    }
+        return {
+            "title": title,
+            "slug": slug,
+            "html": full_html,
+            "summary": summary,
+            "file_path": file_path,
+        }
 
-
-def _wrap_in_html_page(title: str, article_html: str, date: str) -> str:
-    return f"""<!DOCTYPE html>
+    def _wrap_in_html_page(self, title: str, article_html: str, date: str) -> str:
+        return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -203,6 +198,7 @@ if __name__ == "__main__":
         {"keyword": "coquette fashion", "count": 10},
         {"keyword": "quiet luxury", "count": 8},
     ]
-    result = generate_blog_post(test_keywords)
+    writer_agent = WriterAgent()
+    result = writer_agent.generate_blog_post(test_keywords)
     if result:
         print("\n생성 성공:", result["title"])
