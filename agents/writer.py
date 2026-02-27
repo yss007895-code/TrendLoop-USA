@@ -90,7 +90,10 @@ Write the blog post now:"""
         if not article_html:
             return {}
     except Exception as e:
-        print(f"[작가] Gemini API 오류: {e}")
+        error_msg = str(e)
+        if GEMINI_API_KEY and GEMINI_API_KEY in error_msg:
+            error_msg = error_msg.replace(GEMINI_API_KEY, "[REDACTED]")
+        print(f"[작가] Gemini API 오류: {error_msg}")
         tracker.log_error("gemini")
         return {}
 
