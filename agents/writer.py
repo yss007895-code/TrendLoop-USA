@@ -7,8 +7,10 @@
 
 import os
 import re
+import html
 from datetime import datetime, timezone
 from urllib.parse import quote_plus
+import bleach
 from google import genai  # google-genai 패키지 (신규)
 from config import GEMINI_API_KEY, AMAZON_TAG, GEMINI_DAILY_CALL_LIMIT
 from safety import tracker
@@ -123,7 +125,21 @@ Tweet:"""
     if not summary:
         summary = f"New fashion trends alert! {', '.join(keyword_names[:3])} #Fashion #Trending"
 
-    full_html = _wrap_in_html_page(title, article_html, today)
+    # Sanitize article_html before writing to file
+    allowed_tags = [
+        'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'ul', 'ol', 'li',
+        'strong', 'em', 'b', 'i', 'br', 'div', 'span', 'hr', 'blockquote',
+        'pre', 'code'
+    ]
+    allowed_attributes = {
+        'a': ['href', 'title', 'target'],
+        'div': ['class'],
+        'span': ['class']
+    }
+
+    clean_html = bleach.clean(article_html, tags=allowed_tags, attributes=allowed_attributes, strip=True)
+
+    full_html = _wrap_in_html_page(title, clean_html, today)
 
     output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "docs")
     os.makedirs(output_dir, exist_ok=True)
@@ -148,13 +164,15 @@ Tweet:"""
 
 
 def _wrap_in_html_page(title: str, article_html: str, date: str) -> str:
+    # Escape title to prevent attribute injection
+    safe_title = html.escape(title)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} | TrendLoop USA</title>
-    <meta name="description" content="{title} - Discover the latest fashion trends in the USA.">
+    <title>{safe_title} | TrendLoop USA</title>
+    <meta name="description" content="{safe_title} - Discover the latest fashion trends in the USA.">
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
         body {{
