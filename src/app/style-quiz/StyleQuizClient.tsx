@@ -27,10 +27,10 @@ const styleProfiles: Record<string, StyleResult> = {
       { title: 'Best Affordable Blazers Under $100', slug: 'best-affordable-blazers-under-100' },
     ],
     products: [
-      { name: 'Tailored Blazer', price: '$49', url: 'https://amzn.to/4rVjOFg' },
-      { name: 'Silk Camisole', price: '$25', url: 'https://amzn.to/3Mro3JB' },
-      { name: 'Wide Leg Pants', price: '$38', url: 'https://amzn.to/3ZCaw4S' },
-      { name: 'Classic Pumps', price: '$45', url: 'https://amzn.to/3OhrhzW' },
+      { name: 'Tailored Blazer', price: '$49', url: 'https://amzn.to/4rVjOFg?tag=trendloop-20' },
+      { name: 'Silk Camisole', price: '$25', url: 'https://amzn.to/3Mro3JB?tag=trendloop-20' },
+      { name: 'Wide Leg Pants', price: '$38', url: 'https://amzn.to/3ZCaw4S?tag=trendloop-20' },
+      { name: 'Classic Pumps', price: '$45', url: 'https://amzn.to/3OhrhzW?tag=trendloop-20' },
     ],
   },
   trendy: {
@@ -42,10 +42,10 @@ const styleProfiles: Record<string, StyleResult> = {
       { title: 'Spring 2026 Accessories Trends', slug: 'trending-spring-accessories-2026' },
     ],
     products: [
-      { name: 'Leather Jacket', price: '$59', url: 'https://amzn.to/4az8Vlh' },
-      { name: 'Satin Midi Dress', price: '$42', url: 'https://amzn.to/4tH7kT9' },
-      { name: 'Oversized Sunglasses', price: '$18', url: 'https://amzn.to/4tEIRhl' },
-      { name: 'Cigarette Jeans', price: '$42', url: 'https://amzn.to/4kJhrTx' },
+      { name: 'Leather Jacket', price: '$59', url: 'https://amzn.to/4az8Vlh?tag=trendloop-20' },
+      { name: 'Satin Midi Dress', price: '$42', url: 'https://amzn.to/4tH7kT9?tag=trendloop-20' },
+      { name: 'Oversized Sunglasses', price: '$18', url: 'https://amzn.to/4tEIRhl?tag=trendloop-20' },
+      { name: 'Cigarette Jeans', price: '$42', url: 'https://amzn.to/4kJhrTx?tag=trendloop-20' },
     ],
   },
   casual: {
@@ -57,10 +57,10 @@ const styleProfiles: Record<string, StyleResult> = {
       { title: 'Best White Sneakers for Women', slug: 'best-white-sneakers-women-2026' },
     ],
     products: [
-      { name: 'Straight Leg Jeans', price: '$39', url: 'https://amzn.to/4rfVnSQ' },
-      { name: 'White Sneakers', price: '$45', url: 'https://amzn.to/3Mro7cj' },
-      { name: 'Oversized Linen Shirt', price: '$28', url: 'https://amzn.to/4rVjOFg' },
-      { name: 'Crossbody Bag', price: '$24', url: 'https://amzn.to/4anggFT' },
+      { name: 'Straight Leg Jeans', price: '$39', url: 'https://amzn.to/4rfVnSQ?tag=trendloop-20' },
+      { name: 'White Sneakers', price: '$45', url: 'https://amzn.to/3Mro7cj?tag=trendloop-20' },
+      { name: 'Oversized Linen Shirt', price: '$28', url: 'https://amzn.to/4rVjOFg?tag=trendloop-20' },
+      { name: 'Crossbody Bag', price: '$24', url: 'https://amzn.to/4anggFT?tag=trendloop-20' },
     ],
   },
   streetwear: {
@@ -72,10 +72,10 @@ const styleProfiles: Record<string, StyleResult> = {
       { title: '12 Affordable Fashion Brands', slug: 'affordable-fashion-brands-guide' },
     ],
     products: [
-      { name: 'Ribbed Bodysuit', price: '$18', url: 'https://amzn.to/4tH7kT9' },
-      { name: 'Classic White Camisole', price: '$25', url: 'https://amzn.to/3Mro3JB' },
-      { name: 'Gold Layered Necklace Set', price: '$14', url: 'https://amzn.to/3Mro3JB' },
-      { name: 'Versatile Wide Leg Pants', price: '$38', url: 'https://amzn.to/3ZCaw4S' },
+      { name: 'Ribbed Bodysuit', price: '$18', url: 'https://amzn.to/4tH7kT9?tag=trendloop-20' },
+      { name: 'Classic White Camisole', price: '$25', url: 'https://amzn.to/3Mro3JB?tag=trendloop-20' },
+      { name: 'Gold Layered Necklace Set', price: '$14', url: 'https://amzn.to/3Mro3JB?tag=trendloop-20' },
+      { name: 'Versatile Wide Leg Pants', price: '$38', url: 'https://amzn.to/3ZCaw4S?tag=trendloop-20' },
     ],
   },
 };

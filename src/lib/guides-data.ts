@@ -43,10 +43,10 @@ export const guides: StyleGuide[] = [
     emoji: '👗',
     image: '/images/guides/work-capsule-wardrobe-essentials-2026-hero.jpg',
     affiliateProducts: [
-      { name: 'The Drop Women\'s Blake Long Blazer', brand: 'Amazon', price: '$70', url: 'https://amzn.to/4rVjOFg', tag: 'Best Overall', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod0.jpg' },
-      { name: 'GRACE KARIN Women\'s High Waist Pencil Pants with Pockets', brand: 'Amazon', price: '$38', url: 'https://amzn.to/3ZCaw4S', tag: 'Top Trousers', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod1.jpg' },
-      { name: 'Hotouch Women\'s Cotton Button Down Shirt Long Sleeve', brand: 'Amazon', price: '$29', url: 'https://amzn.to/3Mro3JB', tag: 'Must-Have Basic', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod2.jpg' },
-      { name: 'Vince Camuto Women\'s Felima Suede Loafer', brand: 'Amazon', price: '$99', url: 'https://amzn.to/3OhrhzW', tag: 'Best Footwear', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod3.jpg' },
+      { name: 'The Drop Women\'s Blake Long Blazer', brand: 'Amazon', price: '$70', url: 'https://amzn.to/4rVjOFg?tag=trendloop-20', tag: 'Best Overall', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod0.jpg' },
+      { name: 'GRACE KARIN Women\'s High Waist Pencil Pants with Pockets', brand: 'Amazon', price: '$38', url: 'https://amzn.to/3ZCaw4S?tag=trendloop-20', tag: 'Top Trousers', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod1.jpg' },
+      { name: 'Hotouch Women\'s Cotton Button Down Shirt Long Sleeve', brand: 'Amazon', price: '$29', url: 'https://amzn.to/3Mro3JB?tag=trendloop-20', tag: 'Must-Have Basic', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod2.jpg' },
+      { name: 'Vince Camuto Women\'s Felima Suede Loafer', brand: 'Amazon', price: '$99', url: 'https://amzn.to/3OhrhzW?tag=trendloop-20', tag: 'Best Footwear', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod3.jpg' },
     ],
   },
   {
@@ -60,10 +60,10 @@ export const guides: StyleGuide[] = [
     emoji: '💎',
     image: '/images/guides/old-money-aesthetic-on-a-budget-2026-hero.jpg',
     affiliateProducts: [
-      { name: 'The Drop Women\'s Blake Long Blazer', brand: 'Amazon', price: '$75', url: 'https://amzn.to/4rVjOFg', tag: 'Best Overall', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod0.jpg' },
-      { name: 'ANRABESS Women\'s Two Piece Sweater Set', brand: 'Amazon', price: '$50', url: 'https://amzn.to/3ZCaw4S', tag: 'Best Knit Set', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod1.jpg' },
-      { name: 'PAVOI 14K Gold Plated Chunky Open Hoops', brand: 'Amazon', price: '$14', url: 'https://amzn.to/3Mro3JB', tag: 'Best Accessory', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod2.jpg' },
-      { name: 'JW PEI Women\'s Eva Shoulder Bag', brand: 'Amazon', price: '$59', url: 'https://amzn.to/3OhrhzW', tag: 'Best Bag', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod3.jpg' },
+      { name: 'The Drop Women\'s Blake Long Blazer', brand: 'Amazon', price: '$75', url: 'https://amzn.to/4rVjOFg?tag=trendloop-20', tag: 'Best Overall', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod0.jpg' },
+      { name: 'ANRABESS Women\'s Two Piece Sweater Set', brand: 'Amazon', price: '$50', url: 'https://amzn.to/3ZCaw4S?tag=trendloop-20', tag: 'Best Knit Set', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod1.jpg' },
+      { name: 'PAVOI 14K Gold Plated Chunky Open Hoops', brand: 'Amazon', price: '$14', url: 'https://amzn.to/3Mro3JB?tag=trendloop-20', tag: 'Best Accessory', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod2.jpg' },
+      { name: 'JW PEI Women\'s Eva Shoulder Bag', brand: 'Amazon', price: '$59', url: 'https://amzn.to/3OhrhzW?tag=trendloop-20', tag: 'Best Bag', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod3.jpg' },
     ],
   },
 ];
