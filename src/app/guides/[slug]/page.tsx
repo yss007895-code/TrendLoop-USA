@@ -266,7 +266,7 @@ export default function GuideDetailPage({ params }: { params: { slug: string } }
           </div>
         )}
 
-        {/* More From StyleMeDaily */}
+        {/* More From TrendLoop USA */}
         {moreGuides.length > 0 && (
           <div className="mb-8">
             <h3 className="font-display font-bold text-gray-900 mb-4">Explore More Guides</h3>

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact Us — Partnerships & Inquiries',
-  description: 'Get in touch with the StyleMeDaily team for partnerships, sponsorships, or general inquiries.',
+  description: 'Get in touch with the TrendLoop USA team for partnerships, sponsorships, or general inquiries.',
 };
 
 export default function ContactPage() {

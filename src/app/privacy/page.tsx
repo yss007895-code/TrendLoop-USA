@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: 'StyleMeDaily privacy policy — how we collect, use, and protect your data.',
+  description: 'TrendLoop USA privacy policy — how we collect, use, and protect your data.',
 };
 
 export default function PrivacyPage() {
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       </header>
 
       <div className="prose-style">
-        <p>StyleMeDaily (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) respects your privacy. This policy explains how we collect, use, and protect your data when you visit our website.</p>
+        <p>TrendLoop USA (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) respects your privacy. This policy explains how we collect, use, and protect your data when you visit our website.</p>
 
         <h2>Information We Collect</h2>
         <p>We may collect the following types of information:</p>

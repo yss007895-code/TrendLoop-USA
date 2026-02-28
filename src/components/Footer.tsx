@@ -44,7 +44,7 @@ export default function Footer() {
         {/* Affiliate Disclosure */}
         <div className="mt-8 p-4 bg-gray-50 rounded-xl border border-gray-100">
           <p className="text-xs text-gray-500 leading-relaxed">
-            <span className="font-semibold">Affiliate Disclosure:</span> StyleMeDaily is a participant in the Amazon Services LLC Associates Program and other affiliate programs. Some links on this site are affiliate links, meaning we may earn a small commission at no extra cost to you when you make a purchase through our links.
+            <span className="font-semibold">Affiliate Disclosure:</span> TrendLoop USA is a participant in the Amazon Services LLC Associates Program and other affiliate programs. Some links on this site are affiliate links, meaning we may earn a small commission at no extra cost to you when you make a purchase through our links.
           </p>
         </div>
 

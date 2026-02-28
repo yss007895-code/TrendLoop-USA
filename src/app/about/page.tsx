@@ -2,8 +2,8 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'About StyleMeDaily — Our Mission & Team',
-  description: 'StyleMeDaily provides expert styling guides and personalized fashion advice for every woman. Learn about our mission and editorial standards.',
+  title: 'About TrendLoop USA — Our Mission & Team',
+  description: 'TrendLoop USA provides expert styling guides and personalized fashion advice for every woman. Learn about our mission and editorial standards.',
 };
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <div className="prose-style">
         <h2>Our Mission</h2>
         <p>
-          StyleMeDaily was born from a simple idea: every woman deserves access to great style advice, regardless of her budget, body type, or lifestyle. We believe getting dressed should feel easy, not stressful.
+          TrendLoop USA was born from a simple idea: every woman deserves access to great style advice, regardless of her budget, body type, or lifestyle. We believe getting dressed should feel easy, not stressful.
         </p>
         <p>
           Our team creates in-depth style guides, honest product reviews, and retailer comparisons that save you time and money. Every recommendation is personally tested and vetted before we publish it.
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
         <h2>Affiliate Disclosure</h2>
         <p>
-          Some links on StyleMeDaily are affiliate links. This means we may earn a small commission if you purchase through our links, at no extra cost to you. This helps us keep creating free content for our readers.
+          Some links on TrendLoop USA are affiliate links. This means we may earn a small commission if you purchase through our links, at no extra cost to you. This helps us keep creating free content for our readers.
         </p>
 
         <h2>Get in Touch</h2>

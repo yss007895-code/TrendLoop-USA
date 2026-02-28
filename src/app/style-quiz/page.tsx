@@ -20,7 +20,7 @@ export default function StyleQuizPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Quiz',
-    name: 'StyleMeDaily Style Personality Quiz',
+    name: 'TrendLoop USA Style Personality Quiz',
     description: 'Discover your fashion personality with our free 5-question style quiz.',
     url: `${SITE_URL}/style-quiz`,
     provider: {

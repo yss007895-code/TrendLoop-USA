@@ -21,7 +21,7 @@ export default function GuidesPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'StyleMeDaily Style Guides',
+    name: 'TrendLoop USA Style Guides',
     description: 'Browse expert styling guides with outfit ideas and fashion advice.',
     url: `${SITE_URL}/guides`,
     mainEntity: {

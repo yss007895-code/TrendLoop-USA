@@ -51,10 +51,10 @@ export default function HomePage() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What is StyleMeDaily?',
+        name: 'What is TrendLoop USA?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'StyleMeDaily is a personal styling platform that provides expert fashion guides, curated outfit ideas, and product recommendations for every woman, every occasion, and every budget.',
+          text: 'TrendLoop USA is a personal styling platform that provides expert fashion guides, curated outfit ideas, and product recommendations for every woman, every occasion, and every budget.',
         },
       },
       {
