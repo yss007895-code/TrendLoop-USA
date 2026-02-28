@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   title: { default: 'TrendLoop USA – Gen Z Fashion Trends & Style Dupes', template: '%s | TrendLoop USA' },
   description: SITE_DESCRIPTION,
   keywords: ['personal stylist', 'fashion guide', 'outfit ideas', 'capsule wardrobe', 'what to wear', 'style tips women', 'women fashion 2026', 'affordable fashion', 'work outfits', 'date night outfits', 'spring fashion trends'],
-  verification: {
   other: {
     'google-adsense-account': 'ca-pub-8049649445649586',
   },
