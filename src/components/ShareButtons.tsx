@@ -30,7 +30,7 @@ export default function ShareButtons({ url, title, image }: ShareButtonsProps) {
       </a>
       {/* Twitter/X */}
       <a
-        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}&via=stylemedaily`}
+        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}&via=trendloopusa`}
         target="_blank" rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 bg-black text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
         aria-label="Share on X (Twitter)"

@@ -8,7 +8,7 @@ interface Message {
 }
 
 export default function Chatbot() {
-  const siteKey = 'stylemedaily';
+  const siteKey = 'trendloopusa';
   const assistantName = 'Mia - Style Advisor';
   const primaryColor = '#D4956A';
   const apiUrl = '/api/chat';

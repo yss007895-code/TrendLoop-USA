@@ -235,7 +235,7 @@ def insert_guide_into_content_file(content_ts: str):
 
 def git_commit_and_push(slug: str, title: str):
     """Commit and push the new guide."""
-    subprocess.run(["git", "config", "user.email", "agent@stylemedaily.com"], check=True, cwd=ROOT)
+    subprocess.run(["git", "config", "user.email", "agent@trendloopusa.com"], check=True, cwd=ROOT)
     subprocess.run(["git", "config", "user.name", "TrendLoopUSA Content Agent"], check=True, cwd=ROOT)
     subprocess.run(["git", "add", "."], check=True, cwd=ROOT)
     subprocess.run(

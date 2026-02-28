@@ -27,7 +27,7 @@ IMAGE_MODEL = "imagen-3.0-generate-001"
 
 # Auto-detect environment (Windows local vs Linux VM)
 if sys.platform == "win32":
-    WEB_ROOT = r"C:\Users\yss00\stylemedaily-web"
+    WEB_ROOT = r"C:\Users\yss00\trendloop-usa-official"
     PINS_FILE = r"C:\Users\yss00\pins.txt"
     ERROR_LOG = r"C:\Users\yss00\error_log.txt"
     TOPICS_FILE = r"C:\Users\yss00\generated_topics.txt"
@@ -83,7 +83,7 @@ def post_to_twitter(title, slug):
             access_token=TWITTER_CONFIG["access_token"],
             access_token_secret=TWITTER_CONFIG["access_token_secret"]
         )
-        tweet_text = f"✨ New Style Guide: {title}\n\nCheck out the latest 2026 fashion trends on TrendLoopUSA! 👗✨\n\nhttps://stylemedaily.org/guides/{slug}\n\n#FashionTrends #StyleInspo #2026Fashion"
+        tweet_text = f"✨ New Style Guide: {title}\n\nCheck out the latest 2026 fashion trends on TrendLoopUSA! 👗✨\n\nhttps://trendloopusa.org/guides/{slug}\n\n#FashionTrends #StyleInspo #2026Fashion"
         response = twitter_client.create_tweet(text=tweet_text)
         print(f"Successfully posted to Twitter: {response.data['id']}")
         return True

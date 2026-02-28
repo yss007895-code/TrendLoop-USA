@@ -28,11 +28,10 @@ export default function ShopPageClient({ products, categories }: ShopPageClientP
       const priceMatch = price >= range.min && price < range.max;
       if (activeCategory === 'all') return priceMatch;
       const catMap: Record<string, string[]> = {
-        tech: ['tech', 'under-50', 'gadget', 'charger', 'projector'],
-        'room-decor': ['room', 'aesthetic', 'decor', 'gen-z-room'],
         viral: ['viral', 'tiktok'],
-        style: ['style', 'fashion', 'old-money', 'capsule'],
-        budget: ['budget', 'under-30'],
+        tech: ['tech', 'under-50', 'gadget'],
+        'room-decor': ['room', 'aesthetic', 'decor', 'gen-z-room'],
+        style: ['style', 'fashion', 'gen-z-style'],
       };
       const keywords = catMap[activeCategory] || [];
       const slug = p.fromGuideSlug || '';

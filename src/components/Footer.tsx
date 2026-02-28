@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
             <span className="font-display font-bold text-lg text-gray-900 tracking-tight">
-              Style<span className="text-blush-500">Me</span>Daily
+              Trend<span className="text-blue-500">Loop</span>USA
             </span>
-            <p className="text-sm text-gray-400 leading-relaxed mt-3">Expert styling guides and curated fashion advice for every woman, every occasion.</p>
+            <p className="text-sm text-gray-400 leading-relaxed mt-3">Trending finds, viral picks, and lifestyle essentials curated for Gen Z.</p>
             <a href="mailto:contact@trendloopusa.net" className="inline-block mt-3 text-sm text-gray-400 hover:text-gray-600 transition-colors">
               contact@trendloopusa.net
             </a>

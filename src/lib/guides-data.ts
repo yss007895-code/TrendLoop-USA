@@ -23,19 +23,17 @@ export interface AffiliateProduct {
 export const categories = [
   { slug: 'all', name: 'All Finds', icon: '✨' },
   { slug: 'viral', name: 'Viral Finds', icon: '🔥' },
-  { slug: 'tech', name: 'Tech', icon: '⚡' },
-  { slug: 'room-decor', name: 'Room Decor', icon: '🏠' },
-  { slug: 'style', name: 'Style', icon: '💅' },
-  { slug: 'budget', name: 'Budget Picks', icon: '💰' },
+  { slug: 'tech', name: 'Tech & Gadgets', icon: '💡' },
+  { slug: 'room-decor', name: 'Room Aesthetic', icon: '🏠' },
+  { slug: 'style', name: 'Gen Z Style', icon: '👗' },
 ];
 
 export const shopCategories = [
   { slug: 'all', name: 'All Items' },
-  { slug: 'tech', name: 'Tech' },
-  { slug: 'room-decor', name: 'Room Decor' },
-  { slug: 'viral', name: 'Viral Finds' },
-  { slug: 'style', name: 'Style' },
-  { slug: 'budget', name: 'Budget Picks' },
+  { slug: 'viral', name: '🔥 Viral Finds' },
+  { slug: 'tech', name: '💡 Tech & Gadgets' },
+  { slug: 'room-decor', name: '🏠 Room Aesthetic' },
+  { slug: 'style', name: '👗 Gen Z Style' },
 ];
 
 export const guides: StyleGuide[] = [
@@ -48,12 +46,12 @@ export const guides: StyleGuide[] = [
     date: '2026-02-28',
     tag: 'Trending Now',
     emoji: '🔥',
-    image: '/images/guides/old-money-aesthetic-on-a-budget-2026-hero.jpg',
+    image: '/images/shop/tlu-hero-viral-finds-hero.webp',
     affiliateProducts: [
-      { name: 'Govee Neon Rope Lights', brand: 'Amazon', price: '$22', url: 'https://www.amazon.com/s?k=govee+neon+rope+lights&tag=trendloop-20', tag: 'Best Overall', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod0.jpg' },
-      { name: 'ENCALIFE Sunset Projection Lamp', brand: 'Amazon', price: '$18', url: 'https://www.amazon.com/s?k=sunset+projection+lamp&tag=trendloop-20', tag: 'Viral Pick', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod1.jpg' },
-      { name: 'Stanley Quencher 40oz Tumbler', brand: 'Amazon', price: '$45', url: 'https://www.amazon.com/s?k=stanley+quencher+40oz&tag=trendloop-20', tag: 'Most Viral', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod2.jpg' },
-      { name: 'PopSockets Phone Grip', brand: 'Amazon', price: '$10', url: 'https://www.amazon.com/s?k=popsockets+phone+grip&tag=trendloop-20', tag: 'Best Value', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod3.jpg' },
+      { name: 'Govee Neon Rope Lights', brand: 'Govee', price: '$22', url: 'https://www.amazon.com/s?k=govee+neon+rope+lights&tag=trendloop-20', tag: 'Best Overall', image: '/images/shop/tlu-viral-neon-rope-lights-hero.webp' },
+      { name: 'ENCALIFE Sunset Projection Lamp', brand: 'ENCALIFE', price: '$18', url: 'https://www.amazon.com/s?k=sunset+projection+lamp&tag=trendloop-20', tag: 'Viral Pick', image: '/images/shop/tlu-viral-sunset-lamp-hero.webp' },
+      { name: 'Stanley Quencher 40oz Tumbler', brand: 'Stanley', price: '$45', url: 'https://www.amazon.com/s?k=stanley+quencher+40oz&tag=trendloop-20', tag: 'Most Viral', image: '/images/shop/tlu-viral-stanley-tumbler-hero.webp' },
+      { name: 'PopSockets Phone Grip', brand: 'PopSockets', price: '$10', url: 'https://www.amazon.com/s?k=popsockets+phone+grip&tag=trendloop-20', tag: 'Best Value', image: '/images/shop/tlu-viral-popsocket-hero.webp' },
     ],
   },
   {
@@ -65,12 +63,12 @@ export const guides: StyleGuide[] = [
     date: '2026-02-28',
     tag: 'Pillar Guide',
     emoji: '🏠',
-    image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-1.jpg',
+    image: '/images/shop/tlu-hero-room-aesthetic-hero.webp',
     affiliateProducts: [
-      { name: 'Govee Star Projector Galaxy Light', brand: 'Amazon', price: '$29', url: 'https://www.amazon.com/s?k=govee+star+projector&tag=trendloop-20', tag: 'Best Overall', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod0.jpg' },
-      { name: 'Floating Wall Shelves Set of 3', brand: 'Amazon', price: '$26', url: 'https://www.amazon.com/s?k=floating+wall+shelves+aesthetic&tag=trendloop-20', tag: 'Editor Pick', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod1.jpg' },
-      { name: 'LED Neon Sign Custom Light', brand: 'Amazon', price: '$28', url: 'https://www.amazon.com/s?k=led+neon+sign&tag=trendloop-20', tag: 'Viral Find', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod2.jpg' },
-      { name: 'Chunky Knit Throw Blanket', brand: 'Amazon', price: '$24', url: 'https://www.amazon.com/s?k=chunky+knit+throw+blanket&tag=trendloop-20', tag: 'Cozy Pick', image: '/images/guides/work-capsule-wardrobe-essentials-2026-prod3.jpg' },
+      { name: 'Govee Star Projector Galaxy Light', brand: 'Govee', price: '$29', url: 'https://www.amazon.com/s?k=govee+star+projector&tag=trendloop-20', tag: 'Best Overall', image: '/images/shop/tlu-room-star-projector-hero.webp' },
+      { name: 'Floating Wall Shelves Set of 3', brand: 'Amazon Basics', price: '$26', url: 'https://www.amazon.com/s?k=floating+wall+shelves+aesthetic&tag=trendloop-20', tag: 'Editor Pick', image: '/images/shop/tlu-room-floating-shelves-hero.webp' },
+      { name: 'LED Neon Sign Custom Light', brand: 'Amazon', price: '$28', url: 'https://www.amazon.com/s?k=led+neon+sign&tag=trendloop-20', tag: 'Viral Find', image: '/images/shop/tlu-room-neon-sign-hero.webp' },
+      { name: 'Chunky Knit Throw Blanket', brand: 'Amazon', price: '$24', url: 'https://www.amazon.com/s?k=chunky+knit+throw+blanket&tag=trendloop-20', tag: 'Cozy Pick', image: '/images/shop/tlu-room-knit-blanket-hero.webp' },
     ],
   },
   {
@@ -81,30 +79,30 @@ export const guides: StyleGuide[] = [
     readTime: '9 min',
     date: '2026-02-28',
     tag: 'Best Value',
-    emoji: '⚡',
-    image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-2.jpg',
+    emoji: '💡',
+    image: '/images/shop/tlu-hero-tech-gadgets-hero.webp',
     affiliateProducts: [
-      { name: 'Anker 10000mAh Power Bank', brand: 'Amazon', price: '$22', url: 'https://www.amazon.com/s?k=anker+10000mah+power+bank&tag=trendloop-20', tag: 'Best Overall', image: '/images/guides/refined-90s-minimalism-understated-luxury-curated-essentials.jpg' },
-      { name: 'VANKYO Leisure 3W Mini Projector', brand: 'Amazon', price: '$45', url: 'https://www.amazon.com/s?k=vankyo+mini+projector&tag=trendloop-20', tag: 'Top Gadget', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-3.jpg' },
-      { name: '7-in-1 USB-C Hub Adapter', brand: 'Amazon', price: '$28', url: 'https://www.amazon.com/s?k=usb+c+hub+7+in+1&tag=trendloop-20', tag: 'Must Have', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod1.jpg' },
-      { name: 'Bluetooth Beanie with Headphones', brand: 'Amazon', price: '$18', url: 'https://www.amazon.com/s?k=bluetooth+beanie+headphones&tag=trendloop-20', tag: 'Trend Pick', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod2.jpg' },
+      { name: 'Anker 10000mAh Power Bank', brand: 'Anker', price: '$22', url: 'https://www.amazon.com/s?k=anker+10000mah+power+bank&tag=trendloop-20', tag: 'Best Overall', image: '/images/shop/tlu-tech-power-bank-hero.webp' },
+      { name: 'VANKYO Leisure 3W Mini Projector', brand: 'VANKYO', price: '$45', url: 'https://www.amazon.com/s?k=vankyo+mini+projector&tag=trendloop-20', tag: 'Top Gadget', image: '/images/shop/tlu-tech-mini-projector-hero.webp' },
+      { name: '7-in-1 USB-C Hub Adapter', brand: 'Amazon', price: '$28', url: 'https://www.amazon.com/s?k=usb+c+hub+7+in+1&tag=trendloop-20', tag: 'Must Have', image: '/images/shop/tlu-tech-usb-hub-hero.webp' },
+      { name: 'Bluetooth Beanie with Headphones', brand: 'Amazon', price: '$18', url: 'https://www.amazon.com/s?k=bluetooth+beanie+headphones&tag=trendloop-20', tag: 'Trend Pick', image: '/images/shop/tlu-tech-bluetooth-beanie-hero.webp' },
     ],
   },
   {
-    slug: 'budget-fashion-under-30-2026',
-    title: 'Budget Fashion Under $30: Gen Z Style That Looks Expensive',
-    category: 'budget',
+    slug: 'gen-z-style-under-30-2026',
+    title: 'Gen Z Style Under $30: Street Fashion That Hits Different',
+    category: 'style',
     description: 'Y2K, clean girl, cottagecore — whatever your vibe, these pieces under $30 hit every Gen Z aesthetic without wrecking your budget.',
     readTime: '11 min',
     date: '2026-02-28',
     tag: 'Pillar Guide',
-    emoji: '💅',
-    image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-3.jpg',
+    emoji: '👗',
+    image: '/images/shop/tlu-hero-genz-style-hero.webp',
     affiliateProducts: [
-      { name: 'Y2K Cargo Pants Wide Leg', brand: 'Amazon', price: '$28', url: 'https://www.amazon.com/s?k=y2k+cargo+pants+women&tag=trendloop-20', tag: 'Best Overall', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod0.jpg' },
-      { name: 'Oversized Graphic Tee Vintage Wash', brand: 'Amazon', price: '$19', url: 'https://www.amazon.com/s?k=oversized+graphic+tee+women&tag=trendloop-20', tag: 'Most Viral', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod1.jpg' },
-      { name: 'Bucket Hat Y2K Style', brand: 'Amazon', price: '$14', url: 'https://www.amazon.com/s?k=bucket+hat+women+y2k&tag=trendloop-20', tag: 'Trend Pick', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod2.jpg' },
-      { name: 'Ribbed Cami Top 3-Pack', brand: 'Amazon', price: '$24', url: 'https://www.amazon.com/s?k=ribbed+cami+top+women+3+pack&tag=trendloop-20', tag: 'Best Value', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-prod3.jpg' },
+      { name: 'Y2K Cargo Pants Wide Leg', brand: 'Amazon', price: '$28', url: 'https://www.amazon.com/s?k=y2k+cargo+pants+women&tag=trendloop-20', tag: 'Best Overall', image: '/images/shop/tlu-style-cargo-pants-hero.webp' },
+      { name: 'Oversized Graphic Tee Vintage Wash', brand: 'Amazon', price: '$19', url: 'https://www.amazon.com/s?k=oversized+graphic+tee+women&tag=trendloop-20', tag: 'Most Viral', image: '/images/shop/tlu-style-graphic-tee-hero.webp' },
+      { name: 'Bucket Hat Y2K Style', brand: 'Amazon', price: '$14', url: 'https://www.amazon.com/s?k=bucket+hat+women+y2k&tag=trendloop-20', tag: 'Trend Pick', image: '/images/shop/tlu-style-bucket-hat-hero.webp' },
+      { name: 'Ribbed Cami Top 3-Pack', brand: 'Amazon', price: '$24', url: 'https://www.amazon.com/s?k=ribbed+cami+top+women+3+pack&tag=trendloop-20', tag: 'Best Value', image: '/images/shop/tlu-style-cami-top-hero.webp' },
     ],
   },
 ];
@@ -140,11 +138,10 @@ export function getProductsByCategory(
   const all = getAllProducts();
   if (category === 'all') return count ? all.slice(0, count) : all;
   const catMap: Record<string, string[]> = {
-    tech: ['tech', 'under-50', 'gadget', 'charger', 'projector'],
-    'room-decor': ['room', 'aesthetic', 'decor', 'gen-z-room'],
     viral: ['viral', 'tiktok'],
-    style: ['style', 'fashion', 'old-money', 'capsule'],
-    budget: ['budget', 'under-30'],
+    tech: ['tech', 'under-50', 'gadget'],
+    'room-decor': ['room', 'aesthetic', 'decor', 'gen-z-room'],
+    style: ['style', 'fashion', 'gen-z-style'],
   };
   const keywords = catMap[category] || [];
   const filtered = all.filter(p => keywords.some(k => p.fromGuideSlug.includes(k)));
