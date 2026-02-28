@@ -9,13 +9,13 @@ import ShopByCategory from '@/components/ShopByCategory';
 import AdUnit from '@/components/AdUnit';
 
 export default function HomePage() {
-  const editorPicks = guides.slice(0, 3);
+  const deepDives = guides.slice(0, 3);
 
-  const trendingPins = [
-    { title: 'Top TikTok Viral Products 2026', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-hero.jpg', url: '/guides/viral-tiktok-products-2026' },
-    { title: 'Gen Z Room Aesthetic on a Budget', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-1.jpg', url: '/guides/gen-z-room-aesthetic-budget-2026' },
-    { title: 'Best Tech Under $50', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-2.jpg', url: '/guides/best-tech-under-50-2026' },
-    { title: 'Budget Fashion Under $30', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-3.jpg', url: '/guides/budget-fashion-under-30-2026' },
+  const categoryPills = [
+    { label: 'Viral Finds', href: '/shop' },
+    { label: 'Tech', href: '/guides/best-tech-under-50-2026' },
+    { label: 'Room Aesthetic', href: '/guides/gen-z-room-aesthetic-budget-2026' },
+    { label: 'Style', href: '/guides' },
   ];
 
   const organizationJsonLd = {
@@ -90,50 +90,63 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div>
-        {/* Hero — Gen Z editorial style */}
-        <section className="pt-16 pb-20">
-          <p className="text-sm text-blue-500 font-mono tracking-wide uppercase mb-4">
-            Trending Now
-          </p>
-
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5 text-gray-900">
-            Trending now.{' '}
-            <span className="font-display italic text-gray-400">Curated for you.</span>
-          </h1>
-
-          <p className="text-lg text-gray-400 max-w-lg mb-8 leading-relaxed">
-            Viral finds, budget tech, aesthetic room picks, and Gen Z fashion —
-            all under $50 and shipping from Amazon.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/shop" className="btn-primary text-center">Shop Viral Finds</Link>
-            <Link href="/guides" className="btn-secondary text-center">Browse Trend Guides</Link>
+        {/* Hero — Full width black background */}
+        <section className="-mx-4 sm:-mx-6 lg:-mx-8 bg-[#111111] px-4 sm:px-6 lg:px-8 py-20 mb-12">
+          <div className="max-w-7xl mx-auto">
+            <h1 className="font-display text-[3.5rem] sm:text-[5rem] font-black leading-none text-white uppercase" style={{ letterSpacing: '-0.03em' }}>
+              TRENDLOOP
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-400 mt-4 max-w-xl font-body">
+              Viral finds, budget tech, aesthetic room picks, and Gen Z fashion — all under $50.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 mt-8">
+              <Link href="/shop" className="bg-accent text-white font-display font-bold px-8 py-3.5 text-sm uppercase tracking-wide hover:bg-white hover:text-[#111111] transition-colors text-center">
+                Shop Viral Finds
+              </Link>
+              <Link href="/guides" className="border-2 border-white text-white font-display font-bold px-8 py-3.5 text-sm uppercase tracking-wide hover:bg-white hover:text-[#111111] transition-colors text-center">
+                Browse Guides
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* Ad banner between hero and products */}
-        <AdUnit slot="8863913673" format="horizontal" className="mb-4" />
+        {/* Category Pills */}
+        <div className="flex flex-wrap gap-3 mb-12">
+          {categoryPills.map(pill => (
+            <Link
+              key={pill.label}
+              href={pill.href}
+              className="px-5 py-2 bg-surface text-[#111111] font-display font-bold text-sm uppercase tracking-wide hover:bg-[#111111] hover:text-white transition-colors"
+            >
+              {pill.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Ad */}
+        <AdUnit slot="8863913673" format="horizontal" className="mb-8" />
 
         {/* Trending Products */}
         <TrendingProducts />
 
-        {/* Editor Picks — Top 3 guides */}
+        {/* Deep Dives — Numbered guides */}
         <section className="mb-20">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="section-title">Trending Guides</h2>
-              <p className="text-sm text-gray-400 mt-1">This week&apos;s most popular picks</p>
-            </div>
-            <Link href="/guides" className="text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors">View all</Link>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-display text-2xl sm:text-3xl font-black text-[#111111] uppercase tracking-tight">
+              DEEP DIVES
+              <span className="block h-1 w-16 bg-accent mt-2" />
+            </h2>
+            <Link href="/guides" className="text-sm font-display font-bold uppercase tracking-wide text-[#111111] hover:text-accent transition-colors">
+              View all
+            </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {editorPicks.map(g => <GuideCard key={g.slug} guide={g} />)}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {deepDives.map((g, i) => <GuideCard key={g.slug} guide={g} index={i} />)}
           </div>
         </section>
 
-        {/* Ad banner between guides and shop */}
-        <AdUnit slot="8863913673" format="horizontal" className="mb-4" />
+        {/* Ad */}
+        <AdUnit slot="8863913673" format="horizontal" className="mb-8" />
 
         {/* Shop by Category */}
         <ShopByCategory />
@@ -141,38 +154,6 @@ export default function HomePage() {
         {/* Newsletter */}
         <section className="mb-20">
           <NewsletterCTA />
-        </section>
-
-        {/* Trending Gallery — 4 guides */}
-        <section className="mb-16">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="section-title">What&apos;s Hot Right Now</h2>
-              <p className="text-sm text-gray-400 mt-1">Our most popular guides this week</p>
-            </div>
-            <Link href="/guides" className="text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors">
-              See all
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {trendingPins.map((pin, i) => (
-              <Link key={i} href={pin.url} className="group relative rounded-xl overflow-hidden aspect-[2/3] block">
-                <SafeImage
-                  src={pin.image}
-                  alt={pin.title}
-                  fill
-                  sizes="(max-width: 640px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="font-display font-bold text-white text-sm leading-tight">
-                    {pin.title}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
         </section>
       </div>
     </>

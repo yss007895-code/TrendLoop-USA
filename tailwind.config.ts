@@ -5,33 +5,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        blue: {
-          50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
-          400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
-          800: '#1e40af', 900: '#1e3a8a',
-        },
-        // blush re-mapped to electric blue for Gen Z rebrand
-        blush: {
-          50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
-          400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
-        },
-        // rose re-mapped to blue family
-        rose: {
-          50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
-          400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
-          800: '#1e40af', 900: '#1e3a8a',
-        },
-        cream: '#fefbf6',
-        champagne: '#f5f0eb',
+        accent: '#FF3B00',
+        'accent-blue': '#0019FF',
+        surface: '#F5F5F5',
+        muted: '#777777',
+        border: '#E0E0E0',
       },
       fontFamily: {
-        display: ['Playfair Display', 'Georgia', 'serif'],
-        body: ['DM Sans', 'Helvetica', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['"Instrument Sans"', 'Arial', 'sans-serif'],
+        body: ['"Source Sans 3"', 'Helvetica', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      letterSpacing: {
+        'tight-brand': '-0.03em',
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-out',
-        'slide-up': 'slideUp 0.4s ease-out',
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'slide-up': 'slideUp 0.3s ease-out',
         'slide-in-bottom': 'slideInBottom 0.3s ease-out',
       },
       keyframes: {
