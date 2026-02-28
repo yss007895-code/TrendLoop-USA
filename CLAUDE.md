@@ -1,4 +1,4 @@
-# StyleMeDaily - Claude Code Agent
+# TrendLoopUSA - Claude Code Agent
 
 ## 프로젝트 개요
 패션 어필리에이트 블로그. Amazon Associates + Skimlinks로 수익화.
@@ -91,4 +91,4 @@ node scripts/agent-generate.js --full
 ## 필수 규칙
 - 파일 수정 후 반드시 git add, git commit, git push까지 완료할 것
 - push 없이 작업 완료 보고 금지
-- 커밋 메시지 형식: "[StyleMeDaily] 변경 내용 요약"
+- 커밋 메시지 형식: "[TrendLoopUSA] 변경 내용 요약"

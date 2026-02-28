@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-StyleMeDaily Auto Content Agent
+TrendLoopUSA Auto Content Agent
 Generates new fashion guides using Claude API for text and Imagen 4.0 Ultra for images.
 """
 
@@ -84,7 +84,7 @@ def generate_imagen_image(gemini_client, prompt: str, slug: str, suffix: str, as
 def generate_guide_json(client, existing_slugs: list[str]) -> dict:
     """Call Gemini API to generate a new unique fashion guide optimized for Amazon affiliates."""
 
-    prompt = f"""You are an elite fashion content strategist for StyleMeDaily. Your goal is to drive massive organic traffic and maximize Amazon Affiliate conversions.
+    prompt = f"""You are an elite fashion content strategist for TrendLoopUSA. Your goal is to drive massive organic traffic and maximize Amazon Affiliate conversions.
 
 Generate ONE new SEO-optimized fashion guide. Return ONLY valid JSON, no other text.
 
@@ -101,7 +101,7 @@ Use this EXACT JSON structure:
   "date": "{datetime.now().strftime('%Y-%m-%d')}",
   "tag": "Guide",
   "emoji": "👗",
-  "hero_image_prompt": "A detailed, photorealistic prompt for an AI image generator (Imagen 4) for the main cover image. Feature a high-fashion editorial look related to the topic. End the prompt with 'Typography text overlay reading StyleMeDaily'.",
+  "hero_image_prompt": "A detailed, photorealistic prompt for an AI image generator (Imagen 4) for the main cover image. Feature a high-fashion editorial look related to the topic. End the prompt with 'Typography text overlay reading TrendLoopUSA'.",
   "affiliateProducts": [
     {{
       "name": "Specific Amazon Product Name (e.g. Levi's Ribcage Straight Ankle Jeans)",
@@ -236,7 +236,7 @@ def insert_guide_into_content_file(content_ts: str):
 def git_commit_and_push(slug: str, title: str):
     """Commit and push the new guide."""
     subprocess.run(["git", "config", "user.email", "agent@stylemedaily.com"], check=True, cwd=ROOT)
-    subprocess.run(["git", "config", "user.name", "StyleMeDaily Content Agent"], check=True, cwd=ROOT)
+    subprocess.run(["git", "config", "user.name", "TrendLoopUSA Content Agent"], check=True, cwd=ROOT)
     subprocess.run(["git", "add", "."], check=True, cwd=ROOT)
     subprocess.run(
         ["git", "commit", "-m", f"feat: auto-generate guide '{title}' [{slug}] with Imagen 4"],
@@ -248,7 +248,7 @@ def git_commit_and_push(slug: str, title: str):
 
 
 def main():
-    print("🤖 StyleMeDaily Content Agent (Premium Edition) starting...")
+    print("🤖 TrendLoopUSA Content Agent (Premium Edition) starting...")
 
     # Initialize clients
     gemini_client = genai.Client(vertexai=True, project="fashion-money-maker", location="us-central1")

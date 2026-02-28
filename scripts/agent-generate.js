@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * StyleMeDaily AI Agent
+ * TrendLoopUSA AI Agent
  * Claude Code로 실행: node scripts/agent-generate.js
  * 
  * 자동으로:
@@ -199,7 +199,7 @@ function gitPush(slug) {
 }
 
 async function main() {
-  console.log('🤖 StyleMeDaily Agent starting...\n');
+  console.log('🤖 TrendLoopUSA Agent starting...\n');
 
   if (isFullAuto) {
     console.log('🔄 Running full auto mode...');

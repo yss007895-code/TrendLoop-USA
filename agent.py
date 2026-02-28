@@ -83,7 +83,7 @@ def post_to_twitter(title, slug):
             access_token=TWITTER_CONFIG["access_token"],
             access_token_secret=TWITTER_CONFIG["access_token_secret"]
         )
-        tweet_text = f"✨ New Style Guide: {title}\n\nCheck out the latest 2026 fashion trends on StyleMeDaily! 👗✨\n\nhttps://stylemedaily.org/guides/{slug}\n\n#FashionTrends #StyleInspo #2026Fashion"
+        tweet_text = f"✨ New Style Guide: {title}\n\nCheck out the latest 2026 fashion trends on TrendLoopUSA! 👗✨\n\nhttps://stylemedaily.org/guides/{slug}\n\n#FashionTrends #StyleInspo #2026Fashion"
         response = twitter_client.create_tweet(text=tweet_text)
         print(f"Successfully posted to Twitter: {response.data['id']}")
         return True
