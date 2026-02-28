@@ -25,7 +25,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 group">
             <span className="font-display font-bold text-xl text-gray-900 tracking-tight">
-              Style<span className="text-blush-500">Me</span>Daily
+              Trend<span className="text-pink-500">Loop USA</span>
             </span>
           </Link>
 
