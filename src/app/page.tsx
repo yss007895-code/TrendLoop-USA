@@ -11,11 +11,11 @@ import AdUnit from '@/components/AdUnit';
 export default function HomePage() {
   const editorPicks = guides.slice(0, 3);
 
-  const pinterestPins = [
-    { title: 'Capsule Wardrobe Guide 2026', image: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=400&h=600&fit=crop', url: '/guides/capsule-wardrobe-working-women-2026' },
-    { title: 'Casual Outfits That Look Expensive', image: 'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=400&h=600&fit=crop', url: '/guides/casual-outfits-look-expensive' },
-    { title: 'First Date Outfits', image: 'https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?w=400&h=600&fit=crop', url: '/guides/first-date-outfits-every-vibe' },
-    { title: 'Spring Fashion Trends', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=600&fit=crop', url: '/guides/spring-fashion-trends-2026' },
+  const trendingPins = [
+    { title: 'Top TikTok Viral Products 2026', image: '/images/guides/old-money-aesthetic-on-a-budget-2026-hero.jpg', url: '/guides/viral-tiktok-products-2026' },
+    { title: 'Gen Z Room Aesthetic on a Budget', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-1.jpg', url: '/guides/gen-z-room-aesthetic-budget-2026' },
+    { title: 'Best Tech Under $50', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-2.jpg', url: '/guides/best-tech-under-50-2026' },
+    { title: 'Budget Fashion Under $30', image: '/images/guides/spring-2026-luxury-fashion-trends-quiet-power-dressing-3.jpg', url: '/guides/budget-fashion-under-30-2026' },
   ];
 
   const organizationJsonLd = {
@@ -27,7 +27,6 @@ export default function HomePage() {
     logo: `${SITE_URL}/logo.png`,
     sameAs: [
       'https://www.pinterest.com/trendloopusa/',
-      'https://instagram.com/trendloopusa',
       'https://twitter.com/trendloopusa',
     ],
     contactPoint: {
@@ -54,23 +53,23 @@ export default function HomePage() {
         name: 'What is TrendLoop USA?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'TrendLoop USA is a personal styling platform that provides expert fashion guides, curated outfit ideas, and product recommendations for every woman, every occasion, and every budget.',
+          text: 'TrendLoop USA is a Gen Z trend platform that curates viral products, aesthetic room finds, budget tech, and style picks from Amazon — all under $50.',
         },
       },
       {
         '@type': 'Question',
-        name: 'How do I find the right outfit for my body type?',
+        name: 'Are the products really under $30?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Take our free Style Quiz to discover your personal style profile, or browse our Body Shape Guide for tailored outfit recommendations based on your unique proportions.',
+          text: 'Yes! Our Budget Picks section features hand-picked Gen Z fashion and lifestyle products all priced under $30. We update our picks weekly based on trending Amazon finds.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Are the product recommendations affordable?',
+        name: 'How do you choose viral products?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes! We curate products across all price ranges, from budget-friendly finds under $30 to investment pieces. Each guide includes options for every budget.',
+          text: 'Our editors track trending products across social platforms and curate the ones that are genuinely useful, affordable, and worth the hype. We only feature products with strong reviews.',
         },
       },
     ],
@@ -91,25 +90,25 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div>
-        {/* Hero â Clean editorial style */}
+        {/* Hero — Gen Z editorial style */}
         <section className="pt-16 pb-20">
-          <p className="text-sm text-gray-400 font-mono tracking-wide uppercase mb-4">
-            Your Daily Style Edit
+          <p className="text-sm text-blue-500 font-mono tracking-wide uppercase mb-4">
+            Trending Now
           </p>
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-5 text-gray-900">
-            Fashion that fits{' '}
-            <span className="font-display italic text-gray-400">your life</span>
+            Trending now.{' '}
+            <span className="font-display italic text-gray-400">Curated for you.</span>
           </h1>
 
           <p className="text-lg text-gray-400 max-w-lg mb-8 leading-relaxed">
-            Curated style guides, honest product reviews, and outfit inspiration
-            for every occasion and every budget.
+            Viral finds, budget tech, aesthetic room picks, and Gen Z fashion —
+            all under $50 and shipping from Amazon.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/shop" className="btn-primary text-center">Shop Editor&apos;s Picks</Link>
-            <Link href="/guides" className="btn-secondary text-center">Browse Style Guides</Link>
+            <Link href="/shop" className="btn-primary text-center">Shop Viral Finds</Link>
+            <Link href="/guides" className="btn-secondary text-center">Browse Trend Guides</Link>
           </div>
         </section>
 
@@ -119,12 +118,12 @@ export default function HomePage() {
         {/* Trending Products */}
         <TrendingProducts />
 
-        {/* Editor's Picks â Top 3 guides */}
+        {/* Editor Picks — Top 3 guides */}
         <section className="mb-20">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="section-title">Editor&apos;s Picks</h2>
-              <p className="text-sm text-gray-400 mt-1">Hand-selected guides by our styling team</p>
+              <h2 className="section-title">Trending Guides</h2>
+              <p className="text-sm text-gray-400 mt-1">This week&apos;s most popular picks</p>
             </div>
             <Link href="/guides" className="text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors">View all</Link>
           </div>
@@ -144,20 +143,19 @@ export default function HomePage() {
           <NewsletterCTA />
         </section>
 
-        {/* Pinterest Gallery â 4 pins */}
+        {/* Trending Gallery — 4 guides */}
         <section className="mb-16">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="section-title">Trending Styles</h2>
-              <p className="text-sm text-gray-400 mt-1">Our most popular style guides this week</p>
+              <h2 className="section-title">What&apos;s Hot Right Now</h2>
+              <p className="text-sm text-gray-400 mt-1">Our most popular guides this week</p>
             </div>
-            <a href="https://www.pinterest.com/trendloopusa/" target="_blank" rel="noopener noreferrer"
-              className="text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors">
-              Follow
-            </a>
+            <Link href="/guides" className="text-sm text-gray-500 hover:text-gray-900 font-medium transition-colors">
+              See all
+            </Link>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {pinterestPins.map((pin, i) => (
+            {trendingPins.map((pin, i) => (
               <Link key={i} href={pin.url} className="group relative rounded-xl overflow-hidden aspect-[2/3] block">
                 <SafeImage
                   src={pin.image}

@@ -5,14 +5,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        rose: {
-          50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 300: '#fda4af',
-          400: '#fb7185', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c',
-          800: '#9f1239', 900: '#881337',
+        blue: {
+          50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
+          400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+          800: '#1e40af', 900: '#1e3a8a',
         },
+        // blush re-mapped to electric blue for Gen Z rebrand
         blush: {
-          50: '#fdf2f8', 100: '#fce7f3', 200: '#fbcfe8', 300: '#f9a8d4',
-          400: '#f472b6', 500: '#ec4899', 600: '#db2777', 700: '#be185d',
+          50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
+          400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+        },
+        // rose re-mapped to blue family
+        rose: {
+          50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd',
+          400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8',
+          800: '#1e40af', 900: '#1e3a8a',
         },
         cream: '#fefbf6',
         champagne: '#f5f0eb',

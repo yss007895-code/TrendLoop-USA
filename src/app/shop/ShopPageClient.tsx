@@ -12,9 +12,9 @@ interface ShopPageClientProps {
 
 const priceRanges = [
   { label: 'All Prices', min: 0, max: Infinity },
-  { label: 'Under $25', min: 0, max: 25 },
-  { label: '$25 – $50', min: 25, max: 50 },
-  { label: '$50+', min: 50, max: Infinity },
+  { label: 'Under $20', min: 0, max: 20 },
+  { label: '$20 – $30', min: 20, max: 30 },
+  { label: '$30+', min: 30, max: Infinity },
 ];
 
 export default function ShopPageClient({ products, categories }: ShopPageClientProps) {
@@ -28,11 +28,11 @@ export default function ShopPageClient({ products, categories }: ShopPageClientP
       const priceMatch = price >= range.min && price < range.max;
       if (activeCategory === 'all') return priceMatch;
       const catMap: Record<string, string[]> = {
-        workwear: ['work', 'professional', 'office', 'interview', 'laptop', 'blazer'],
-        casual: ['casual', 'jeans', 'sneakers', 'minimalist', 'running'],
-        'date-night': ['date', 'night'],
-        seasonal: ['spring', 'summer', 'trending', 'must-have', 'accessories'],
-        budget: ['affordable', 'budget', 'under-30', 'under-100', 'amazon-fashion'],
+        tech: ['tech', 'under-50', 'gadget', 'charger', 'projector'],
+        'room-decor': ['room', 'aesthetic', 'decor', 'gen-z-room'],
+        viral: ['viral', 'tiktok'],
+        style: ['style', 'fashion', 'old-money', 'capsule'],
+        budget: ['budget', 'under-30'],
       };
       const keywords = catMap[activeCategory] || [];
       const slug = p.fromGuideSlug || '';
@@ -52,7 +52,7 @@ export default function ShopPageClient({ products, categories }: ShopPageClientP
               onClick={() => setActiveCategory(cat.slug)}
               className={`px-3.5 py-2 text-sm font-medium whitespace-nowrap rounded-lg transition-colors ${
                 activeCategory === cat.slug
-                  ? 'bg-gray-900 text-white'
+                  ? 'bg-blue-600 text-white'
                   : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
               }`}
             >
@@ -60,15 +60,15 @@ export default function ShopPageClient({ products, categories }: ShopPageClientP
             </button>
           ))}
         </div>
-        <div className="flex gap-1 sm:ml-auto">
+        <div className="flex gap-1">
           {priceRanges.map((range, i) => (
             <button
-              key={range.label}
+              key={i}
               onClick={() => setActivePriceRange(i)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
+              className={`px-3 py-2 text-xs font-medium whitespace-nowrap rounded-lg transition-colors ${
                 activePriceRange === i
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-400 hover:text-gray-600'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-400 hover:text-gray-600 hover:bg-gray-50'
               }`}
             >
               {range.label}
@@ -77,64 +77,44 @@ export default function ShopPageClient({ products, categories }: ShopPageClientP
         </div>
       </div>
 
-      {/* Results count */}
-      <p className="text-xs text-gray-400 mb-4">{filtered.length} items</p>
-
-      {/* Product Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {filtered.map((p, i) => (
-          <a
-            key={`${p.name}-${i}`}
-            href={p.url}
-            target="_blank"
-            rel="noopener noreferrer nofollow sponsored"
-            className="product-card group block"
-          >
-            {p.image ? (
-              <div className="relative h-40 overflow-hidden bg-gray-50">
+      {filtered.length === 0 ? (
+        <p className="text-gray-400 text-sm py-12 text-center">No items match your filters.</p>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {filtered.map((product, i) => (
+            <a
+              key={i}
+              href={product.url}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="group border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition-shadow"
+            >
+              <div className="relative aspect-square bg-gray-50">
                 <SafeImage
-                  src={p.image}
-                  alt={p.name}
+                  src={product.image || '/images/placeholder.jpg'}
+                  alt={product.name}
                   fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                <div className="product-card-action absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 transition-opacity duration-300">
-                  <span className="text-white text-sm font-semibold px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
-                    Shop Now
+                {product.tag && (
+                  <span className="absolute top-2 left-2 bg-blue-600 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                    {product.tag}
                   </span>
+                )}
+              </div>
+              <div className="p-3">
+                <p className="text-xs text-gray-400 mb-1">{product.brand}</p>
+                <p className="text-sm font-medium text-gray-900 leading-snug line-clamp-2 mb-2 group-hover:text-blue-600 transition-colors">
+                  {product.name}
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-bold text-blue-600">{product.price}</span>
+                  <span className="text-xs text-gray-300">View on Amazon</span>
                 </div>
               </div>
-            ) : (
-              <div className="h-40 bg-gray-50 flex items-center justify-center">
-                <span className="text-gray-300 text-sm">No image</span>
-              </div>
-            )}
-            <div className="p-3">
-              <p className="text-[11px] text-gray-400 uppercase tracking-wide">{p.brand}</p>
-              <h4 className="font-medium text-sm text-gray-800 group-hover:text-gray-900 transition-colors leading-tight mt-0.5 line-clamp-2">
-                {p.name}
-              </h4>
-              <div className="flex items-center gap-2 mt-1.5">
-                <span className="price-current text-sm">{p.price}</span>
-              </div>
-              <p className="text-[11px] text-gray-400 mt-1.5 line-clamp-1">
-                As seen in: {p.fromGuide}
-              </p>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      {filtered.length === 0 && (
-        <div className="text-center py-16">
-          <p className="text-gray-400">No items match your filters.</p>
-          <button
-            onClick={() => { setActiveCategory('all'); setActivePriceRange(0); }}
-            className="mt-3 text-sm text-gray-500 hover:text-gray-900 font-medium"
-          >
-            Clear filters
-          </button>
+            </a>
+          ))}
         </div>
       )}
     </div>
