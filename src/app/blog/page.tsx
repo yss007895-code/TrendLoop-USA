@@ -117,16 +117,16 @@ export default function BlogPage() {
 
   return (
     <div className="pt-8 max-w-4xl mx-auto">
-      <div className="mb-10">
+      <div className="mb-10 border-b border-zinc-800 pb-4">
         <h1 className="section-title">The Loop</h1>
-        <p className="text-gray-400 mt-1">What&apos;s trending now — culture, lifestyle, and everything in between</p>
+        <p className="text-zinc-500 mt-1">What&apos;s trending now — culture, lifestyle, and everything in between</p>
       </div>
 
-      {/* Featured Post */}
+      {/* Featured Post — Verge-style high contrast feed item */}
       <Link href={featured.link} className="block group mb-12">
-        <div className="card-hover overflow-hidden rounded-xl">
+        <div className="overflow-hidden">
           {featured.image && (
-            <div className="relative h-64 sm:h-80 overflow-hidden">
+            <div className="relative h-64 sm:h-80 overflow-hidden bg-surface">
               <SafeImage
                 src={featured.image}
                 alt={featured.title}
@@ -135,74 +135,69 @@ export default function BlogPage() {
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute top-4 left-4">
-                <span className="text-[11px] font-medium text-white bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                <span className="text-[11px] font-bold text-black bg-accent px-3 py-1 uppercase tracking-wide">
                   {featured.cat}
                 </span>
               </div>
             </div>
           )}
-          <div className="p-6">
-            <div className="flex items-center gap-3 text-xs text-gray-400 mb-3">
+          <div className="py-6 border-b border-zinc-800">
+            <div className="flex items-center gap-3 text-xs text-zinc-600 font-mono mb-3">
               <span>{featured.date}</span>
               <span>&middot;</span>
               <span>{featured.time} read</span>
             </div>
-            <h2 className="font-display text-2xl font-bold text-gray-900 group-hover:text-gray-600 transition-colors mb-3 leading-snug">
+            <h2 className="font-display text-2xl sm:text-3xl font-black text-white group-hover:text-accent transition-colors mb-3 leading-snug uppercase tracking-tight">
               {featured.title}
             </h2>
-            <p className="text-gray-400 leading-relaxed">{featured.excerpt}</p>
+            <p className="text-zinc-500 leading-relaxed">{featured.excerpt}</p>
           </div>
         </div>
       </Link>
 
-      {/* Post Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Post Feed — Verge-style list with thumbnails */}
+      <div className="space-y-0">
         {rest.map(p => (
-          <Link key={p.slug} href={p.link} className="card-hover block group overflow-hidden rounded-xl">
+          <Link key={p.slug} href={p.link} className="flex gap-5 py-6 border-b border-zinc-800 group hover:bg-zinc-900/50 transition-colors -mx-4 px-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 text-[10px] font-mono text-zinc-600 uppercase tracking-wide mb-2">
+                <span className="text-accent font-bold">{p.cat}</span>
+                <span>{p.date}</span>
+                <span>{p.time}</span>
+              </div>
+              <h3 className="font-display font-bold text-white group-hover:text-accent transition-colors mb-2 leading-snug">
+                {p.title}
+              </h3>
+              <p className="text-sm text-zinc-500 line-clamp-2">{p.excerpt}</p>
+            </div>
             {p.image && (
-              <div className="relative h-44 overflow-hidden">
+              <div className="relative w-28 h-28 sm:w-36 sm:h-28 shrink-0 overflow-hidden bg-surface">
                 <SafeImage
                   src={p.image}
                   alt={p.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="144px"
+                  className="object-cover"
                 />
-                <div className="absolute top-3 left-3">
-                  <span className="text-[10px] font-medium text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                    {p.cat}
-                  </span>
-                </div>
               </div>
             )}
-            <div className="p-5">
-              <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
-                <span>{p.date}</span>
-                <span>&middot;</span>
-                <span>{p.time} read</span>
-              </div>
-              <h3 className="font-display font-bold text-gray-900 group-hover:text-gray-600 transition-colors mb-2 leading-snug">
-                {p.title}
-              </h3>
-              <p className="text-sm text-gray-400 line-clamp-2">{p.excerpt}</p>
-            </div>
           </Link>
         ))}
       </div>
 
       {/* Newsletter CTA */}
-      <div className="mt-16 border border-gray-100 rounded-xl p-8 text-center bg-white">
-        <h3 className="font-display text-xl font-bold text-gray-900 mb-2">Stay in the Loop</h3>
-        <p className="text-gray-400 text-sm mb-6">New trends, viral finds, and lifestyle picks delivered every Thursday.</p>
+      <div className="mt-16 border border-zinc-800 p-8 text-center">
+        <h3 className="font-display text-xl font-bold text-white mb-2">Stay in the Loop</h3>
+        <p className="text-zinc-500 text-sm mb-6">New trends, viral finds, and lifestyle picks delivered every Thursday.</p>
         <iframe
           src="https://trendloopusa.substack.com/embed"
           width="100%"
           height="130"
-          style={{ border: '1px solid #EEE', background: 'white', borderRadius: '12px', maxWidth: '480px', display: 'block', margin: '0 auto' }}
+          style={{ border: '1px solid #333', background: '#111', maxWidth: '480px', display: 'block', margin: '0 auto' }}
           frameBorder={0}
           scrolling="no"
         />
-        <p className="text-[11px] text-gray-400 mt-3">No spam. Unsubscribe anytime.</p>
+        <p className="text-[11px] text-zinc-600 mt-3">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   );

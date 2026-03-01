@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
-      <body className="min-h-screen bg-white text-[#111111] antialiased font-body">
+      <body className="min-h-screen bg-black text-white antialiased font-body">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <script
           type="application/ld+json"
@@ -85,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         )}
         <Header />
-        <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <main id="main-content" className="max-w-7xl mx-auto px-6 pb-20">
           {children}
         </main>
         <Footer />

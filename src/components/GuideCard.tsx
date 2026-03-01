@@ -6,7 +6,7 @@ export default function GuideCard({ guide, index }: { guide: StyleGuide; index?:
   const num = index !== undefined ? String(index + 1).padStart(2, '0') : null;
 
   return (
-    <Link href={`/guides/${guide.slug}`} className="group block">
+    <Link href={`/guides/${guide.slug}`} className="group block border-t border-zinc-800 pt-5">
       {guide.image && (
         <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-surface">
           <SafeImage
@@ -17,7 +17,7 @@ export default function GuideCard({ guide, index }: { guide: StyleGuide; index?:
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3">
-            <span className="text-[11px] font-display font-bold text-white bg-[#111111] px-3 py-1 uppercase tracking-wide">
+            <span className="text-[11px] font-display font-bold text-black bg-accent px-3 py-1 uppercase tracking-wide">
               {guide.tag}
             </span>
           </div>
@@ -31,14 +31,14 @@ export default function GuideCard({ guide, index }: { guide: StyleGuide; index?:
             </span>
           )}
           <div>
-            <h3 className="font-display font-bold text-[#111111] group-hover:text-accent transition-colors leading-snug text-lg">
+            <h3 className="font-display font-bold text-white group-hover:text-accent transition-colors leading-snug text-lg">
               {guide.title}
             </h3>
-            <p className="text-sm text-muted mt-1.5 line-clamp-2">{guide.description}</p>
+            <p className="text-sm text-zinc-500 mt-1.5 line-clamp-2">{guide.description}</p>
             <div className="flex items-center gap-3 mt-2">
-              <span className="text-xs font-mono text-muted">{guide.readTime}</span>
+              <span className="text-xs font-mono text-zinc-600">{guide.readTime}</span>
               {guide.affiliateProducts && guide.affiliateProducts.length > 0 && (
-                <span className="text-xs font-mono text-muted">
+                <span className="text-xs font-mono text-zinc-600">
                   {guide.affiliateProducts.length} items
                 </span>
               )}

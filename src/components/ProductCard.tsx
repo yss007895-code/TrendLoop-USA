@@ -19,7 +19,7 @@ export default function ProductCard({ product, size = 'md', showFrom = false }: 
       className="product-card group block"
     >
       {p.image ? (
-        <div className={`relative ${imageHeight} overflow-hidden bg-gray-50`}>
+        <div className={`relative ${imageHeight} overflow-hidden bg-zinc-900`}>
           <SafeImage
             src={p.image}
             alt={p.name}
@@ -28,27 +28,27 @@ export default function ProductCard({ product, size = 'md', showFrom = false }: 
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             category="fashion"
           />
-          <div className="product-card-action absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 transition-opacity duration-300">
-            <span className="text-white text-sm font-semibold px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg border border-white/30">
+          <div className="product-card-action absolute inset-0 bg-accent/20 flex items-center justify-center opacity-0 transition-opacity duration-300">
+            <span className="text-black text-sm font-bold px-4 py-2 bg-accent">
               Shop Now
             </span>
           </div>
         </div>
       ) : (
-        <div className={`${imageHeight} bg-gray-50 flex items-center justify-center`}>
-          <span className="text-gray-300 text-sm">No image</span>
+        <div className={`${imageHeight} bg-zinc-900 flex items-center justify-center`}>
+          <span className="text-zinc-600 text-sm">No image</span>
         </div>
       )}
       <div className="p-3">
-        <p className="text-[11px] text-gray-400 uppercase tracking-wide">{p.brand}</p>
-        <h4 className="font-medium text-sm text-gray-800 group-hover:text-gray-900 transition-colors leading-tight mt-0.5 line-clamp-2">
+        <p className="text-[11px] text-zinc-600 uppercase tracking-wide">{p.brand}</p>
+        <h4 className="font-medium text-sm text-zinc-300 group-hover:text-accent transition-colors leading-tight mt-0.5 line-clamp-2">
           {p.name}
         </h4>
         <div className="flex items-center gap-2 mt-1.5">
           <span className="price-current text-sm">{p.price}</span>
         </div>
         {showFrom && p.fromGuide && (
-          <p className="text-[11px] text-gray-400 mt-1.5 line-clamp-1">
+          <p className="text-[11px] text-zinc-600 mt-1.5 line-clamp-1">
             As seen in: {p.fromGuide}
           </p>
         )}

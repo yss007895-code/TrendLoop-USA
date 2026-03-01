@@ -18,10 +18,10 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-zinc-800">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-14">
-          <Link href="/" className="font-display font-black text-xl tracking-tight-brand text-[#111111] uppercase">
+          <Link href="/" className="font-display font-black text-xl tracking-tight-brand text-accent uppercase">
             TRENDLOOP
           </Link>
 
@@ -34,7 +34,7 @@ export default function Header() {
                 className={`px-4 py-2 text-sm font-display font-bold uppercase tracking-wide transition-colors ${
                   isActive(l.href)
                     ? 'text-accent'
-                    : 'text-[#111111] hover:text-accent'
+                    : 'text-zinc-400 hover:text-accent'
                 }`}
               >
                 {l.label}
@@ -44,7 +44,7 @@ export default function Header() {
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-[#111111] hover:text-accent p-2"
+            className="md:hidden text-zinc-400 hover:text-accent p-2"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -57,7 +57,7 @@ export default function Header() {
         </div>
 
         {open && (
-          <nav className="md:hidden pb-4 pt-2 animate-fade-in border-t border-border">
+          <nav className="md:hidden pb-4 pt-2 animate-fade-in border-t border-zinc-800">
             {links.map(l => (
               <Link
                 key={l.href}
@@ -67,7 +67,7 @@ export default function Header() {
                 className={`block px-4 py-3 text-sm font-display font-bold uppercase tracking-wide ${
                   isActive(l.href)
                     ? 'text-accent'
-                    : 'text-[#111111] hover:text-accent'
+                    : 'text-zinc-400 hover:text-accent'
                 }`}
               >
                 {l.label}

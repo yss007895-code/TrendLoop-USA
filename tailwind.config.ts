@@ -5,11 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        accent: '#FF3B00',
+        accent: '#e2ff00',
         'accent-blue': '#0019FF',
-        surface: '#F5F5F5',
-        muted: '#777777',
-        border: '#E0E0E0',
+        surface: '#1a1a1a',
+        muted: '#999999',
+        border: '#333333',
       },
       fontFamily: {
         display: ['"Instrument Sans"', 'Arial', 'sans-serif'],

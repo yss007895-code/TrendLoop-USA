@@ -90,20 +90,20 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div>
-        {/* Hero — Full width black background */}
-        <section className="-mx-4 sm:-mx-6 lg:-mx-8 bg-[#111111] px-4 sm:px-6 lg:px-8 py-20 mb-12">
+        {/* Hero — Verge-style dark with neon accent */}
+        <section className="-mx-6 px-6 border-b border-zinc-800 py-20 mb-12">
           <div className="max-w-7xl mx-auto">
-            <h1 className="font-display text-[3.5rem] sm:text-[5rem] font-black leading-none text-white uppercase" style={{ letterSpacing: '-0.03em' }}>
+            <h1 className="font-display text-[3.5rem] sm:text-[5rem] lg:text-[6rem] font-black leading-none text-accent uppercase" style={{ letterSpacing: '-0.03em' }}>
               TRENDLOOP
             </h1>
-            <p className="text-lg sm:text-xl text-gray-400 mt-4 max-w-xl font-body">
+            <p className="text-lg sm:text-xl text-zinc-500 mt-4 max-w-xl font-body">
               Viral finds, budget tech, aesthetic room picks, and Gen Z fashion — all under $50.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-8">
-              <Link href="/shop" className="bg-accent text-white font-display font-bold px-8 py-3.5 text-sm uppercase tracking-wide hover:bg-white hover:text-[#111111] transition-colors text-center">
+              <Link href="/shop" className="btn-primary text-center">
                 Shop Viral Finds
               </Link>
-              <Link href="/guides" className="border-2 border-white text-white font-display font-bold px-8 py-3.5 text-sm uppercase tracking-wide hover:bg-white hover:text-[#111111] transition-colors text-center">
+              <Link href="/guides" className="btn-secondary text-center">
                 Browse Guides
               </Link>
             </div>
@@ -116,7 +116,7 @@ export default function HomePage() {
             <Link
               key={pill.label}
               href={pill.href}
-              className="px-5 py-2 bg-surface text-[#111111] font-display font-bold text-sm uppercase tracking-wide hover:bg-[#111111] hover:text-white transition-colors"
+              className="px-5 py-2 bg-zinc-900 text-zinc-400 font-display font-bold text-sm uppercase tracking-wide hover:bg-accent hover:text-black transition-colors border border-zinc-800"
             >
               {pill.label}
             </Link>
@@ -132,11 +132,11 @@ export default function HomePage() {
         {/* Deep Dives — Numbered guides */}
         <section className="mb-20">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-display text-2xl sm:text-3xl font-black text-[#111111] uppercase tracking-tight">
+            <h2 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
               DEEP DIVES
               <span className="block h-1 w-16 bg-accent mt-2" />
             </h2>
-            <Link href="/guides" className="text-sm font-display font-bold uppercase tracking-wide text-[#111111] hover:text-accent transition-colors">
+            <Link href="/guides" className="text-sm font-display font-bold uppercase tracking-wide text-zinc-400 hover:text-accent transition-colors">
               View all
             </Link>
           </div>
