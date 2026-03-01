@@ -23,7 +23,7 @@ const blogPosts: Record<string, BlogPost> = {
     excerpt: 'We bought 30 of the most hyped TikTok products and tested each one for a week. Here are the ones that actually delivered.',
     date: '2026-02-28',
     cat: 'Viral',
-    image: '/images/blog/viral-tiktok-products-2026.svg',
+    image: '/images/blog/viral-tiktok-products-2026.jpg',
     content: [
       { heading: 'The Testing Process', paragraphs: [
         'We spent $800 on 30 viral TikTok products with over 1 million views each. Each product got a full week of real-world testing. No sponsorships, no free samples — just honest results.',
@@ -49,7 +49,7 @@ const blogPosts: Record<string, BlogPost> = {
     excerpt: 'The water bottle wars are real. We compared insulation, durability, leak-proofing, and taste after 30 days.',
     date: '2026-02-26',
     cat: 'Review',
-    image: '/images/blog/stanley-vs-owala-vs-yeti.svg',
+    image: '/images/blog/stanley-vs-owala-vs-yeti.jpg',
     content: [
       { heading: 'Why This Comparison Matters', paragraphs: [
         'The Stanley Quencher costs $45. The Owala FreeSip is $28. The Yeti Rambler runs $38. Over a year of daily use, the price difference is negligible — what matters is which one you\'ll actually carry every day.',
@@ -73,7 +73,7 @@ const blogPosts: Record<string, BlogPost> = {
     excerpt: 'Based on data from 200+ survey responses, these are the side hustles real people are using to earn $500-$3,000/month.',
     date: '2026-02-24',
     cat: 'Money',
-    image: '/images/blog/side-hustles-2026.svg',
+    image: '/images/blog/side-hustles-2026.jpg',
     content: [
       { heading: 'The Data Behind This List', paragraphs: [
         'We surveyed 217 people who earn at least $500/month from a side hustle. No MLMs, no dropshipping schemes, no "passive income" fantasies. Just real work that pays real money.',

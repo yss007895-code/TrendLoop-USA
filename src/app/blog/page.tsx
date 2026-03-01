@@ -16,7 +16,7 @@ const posts = [
     date: 'Feb 28, 2026',
     time: '12 min',
     cat: 'Viral',
-    image: '/images/blog/viral-tiktok-products-2026.svg',
+    image: '/images/blog/viral-tiktok-products-2026.jpg',
     link: '/blog/viral-tiktok-products-actually-worth-it-2026',
   },
   {
@@ -26,7 +26,7 @@ const posts = [
     date: 'Feb 26, 2026',
     time: '10 min',
     cat: 'Review',
-    image: '/images/blog/stanley-vs-owala-vs-yeti.svg',
+    image: '/images/blog/stanley-vs-owala-vs-yeti.jpg',
     link: '/blog/stanley-vs-owala-vs-yeti-30-day-test',
   },
   {
@@ -36,7 +36,7 @@ const posts = [
     date: 'Feb 24, 2026',
     time: '14 min',
     cat: 'Money',
-    image: '/images/blog/side-hustles-2026.svg',
+    image: '/images/blog/side-hustles-2026.jpg',
     link: '/blog/side-hustles-actually-working-2026',
   },
   {
@@ -46,7 +46,7 @@ const posts = [
     date: 'Feb 22, 2026',
     time: '11 min',
     cat: 'Food',
-    image: '/images/blog/meal-kit-services-ranked.svg',
+    image: '/images/blog/meal-kit-services-ranked.jpg',
     link: '/blog/best-affordable-meal-kit-services-ranked',
   },
   {
@@ -56,7 +56,7 @@ const posts = [
     date: 'Feb 20, 2026',
     time: '9 min',
     cat: 'Lifestyle',
-    image: '/images/blog/cities-moving-to-2026.svg',
+    image: '/images/blog/cities-moving-to-2026.jpg',
     link: '/blog/cities-everyone-moving-to-2026',
   },
   {
@@ -66,7 +66,7 @@ const posts = [
     date: 'Feb 18, 2026',
     time: '10 min',
     cat: 'Entertainment',
-    image: '/images/blog/streaming-wars-2026.svg',
+    image: '/images/blog/streaming-wars-2026.jpg',
     link: '/blog/netflix-vs-disney-plus-vs-max-2026',
   },
   {
@@ -76,7 +76,7 @@ const posts = [
     date: 'Feb 16, 2026',
     time: '8 min',
     cat: 'Finds',
-    image: '/images/blog/amazon-home-finds-2026.svg',
+    image: '/images/blog/amazon-home-finds-2026.jpg',
     link: '/blog/amazon-home-finds-under-25-viral',
   },
   {
@@ -86,7 +86,7 @@ const posts = [
     date: 'Feb 14, 2026',
     time: '9 min',
     cat: 'Food',
-    image: '/images/blog/food-trends-2026.svg',
+    image: '/images/blog/food-trends-2026.jpg',
     link: '/blog/biggest-food-trends-america-2026',
   },
   {
@@ -96,7 +96,7 @@ const posts = [
     date: 'Feb 12, 2026',
     time: '13 min',
     cat: 'Tech',
-    image: '/images/blog/electric-cars-under-30k.svg',
+    image: '/images/blog/electric-cars-under-30k.jpg',
     link: '/blog/electric-cars-under-30k-worth-buying',
   },
   {
@@ -106,7 +106,7 @@ const posts = [
     date: 'Feb 10, 2026',
     time: '11 min',
     cat: 'Lifestyle',
-    image: '/images/blog/digital-nomad-cities-2026.svg',
+    image: '/images/blog/digital-nomad-cities-2026.jpg',
     link: '/blog/digital-nomad-best-cities-remote-workers',
   },
 ];
