@@ -21,10 +21,10 @@ export default function NotFound() {
         <h2 className="font-display font-bold text-gray-900 text-sm mb-3">Popular right now</h2>
         <div className="space-y-2 text-left">
           {[
-            { title: 'Capsule Wardrobe Guide', href: '/guides/capsule-wardrobe-working-women-2026' },
-            { title: 'Spring Fashion Trends 2026', href: '/guides/spring-fashion-trends-2026' },
-            { title: 'Best Jeans for Every Body Type', href: '/guides/best-jeans-every-body-type' },
-            { title: 'Amazon Fashion Finds Under $30', href: '/guides/amazon-fashion-finds-under-30' },
+            { title: 'Viral TikTok Products Worth Buying', href: '/blog/viral-tiktok-products-actually-worth-it-2026' },
+            { title: 'Stanley vs Owala vs Yeti', href: '/blog/stanley-vs-owala-vs-yeti-30-day-test' },
+            { title: 'Side Hustles That Actually Work', href: '/blog/side-hustles-actually-working-2026' },
+            { title: 'Best Meal Kit Services Ranked', href: '/blog/best-affordable-meal-kit-services-ranked' },
           ].map((link) => (
             <Link key={link.href} href={link.href} className="block text-sm text-gray-500 hover:text-gray-900 transition-colors py-1">
               {link.title}

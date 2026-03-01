@@ -26,9 +26,9 @@ export default function Footer() {
           <div>
             <h4 className="font-display font-bold text-sm uppercase tracking-wide mb-4">Popular</h4>
             <div className="space-y-2.5">
-              <Link href="/guides/capsule-wardrobe-working-women-2026" className="block text-sm text-gray-400 hover:text-white transition-colors">Capsule Wardrobe</Link>
-              <Link href="/guides/dress-for-body-shape-guide" className="block text-sm text-gray-400 hover:text-white transition-colors">Body Shape Guide</Link>
-              <Link href="/compare/nordstrom-vs-asos" className="block text-sm text-gray-400 hover:text-white transition-colors">Nordstrom vs ASOS</Link>
+              <Link href="/blog/viral-tiktok-products-actually-worth-it-2026" className="block text-sm text-gray-400 hover:text-white transition-colors">Viral TikTok Products</Link>
+              <Link href="/blog/stanley-vs-owala-vs-yeti-30-day-test" className="block text-sm text-gray-400 hover:text-white transition-colors">Stanley vs Owala vs Yeti</Link>
+              <Link href="/blog/side-hustles-actually-working-2026" className="block text-sm text-gray-400 hover:text-white transition-colors">Side Hustles 2026</Link>
             </div>
           </div>
           <div>

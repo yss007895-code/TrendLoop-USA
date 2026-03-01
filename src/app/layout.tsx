@@ -9,16 +9,16 @@ import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'TrendLoop USA – Gen Z Fashion Trends & Style Dupes', template: '%s | TrendLoop USA' },
+  title: { default: 'TrendLoop USA — Trends, Culture & Lifestyle', template: '%s | TrendLoop USA' },
   description: SITE_DESCRIPTION,
-  keywords: ['personal stylist', 'fashion guide', 'outfit ideas', 'capsule wardrobe', 'what to wear', 'style tips women', 'women fashion 2026', 'affordable fashion', 'work outfits', 'date night outfits', 'spring fashion trends'],
+  keywords: ['trending 2026', 'viral products', 'lifestyle trends', 'food trends', 'best side hustles', 'streaming comparison', 'amazon finds', 'digital nomad', 'meal kits review', 'electric cars affordable'],
   other: {
     'google-adsense-account': 'ca-pub-8049649445649586',
   },
   openGraph: {
     type: 'website', locale: 'en_US', url: SITE_URL, siteName: SITE_NAME,
-    title: 'TrendLoop USA – Gen Z Fashion Trends & Style Dupes',
-    description: 'Trending fashion finds, affordable style dupes, and Gen Z outfit guides for the modern trendsetter.',
+    title: 'TrendLoop USA — Trends, Culture & Lifestyle',
+    description: 'Viral finds, trending products, lifestyle tips, and culture picks — what\'s worth your time and money in 2026.',
     images: [{ url: '/images/guides/old-money-aesthetic-on-a-budget-2026-hero.jpg', width: 1200, height: 630, alt: 'TrendLoop USA' }],
   },
   twitter: { card: 'summary_large_image', site: '@trendloopusa', creator: '@trendloopusa' },

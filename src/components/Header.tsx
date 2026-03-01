@@ -9,9 +9,7 @@ export default function Header() {
   const links = [
     { href: '/shop', label: 'Shop' },
     { href: '/guides', label: 'Guides' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/compare/nordstrom-vs-asos', label: 'Compare' },
-    { href: '/style-quiz', label: 'Quiz' },
+    { href: '/blog', label: 'The Loop' },
   ];
 
   const isActive = (href: string) => {

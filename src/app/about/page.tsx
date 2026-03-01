@@ -31,12 +31,12 @@ export default function AboutPage() {
         <h2>What We Cover</h2>
         <div className="not-prose grid grid-cols-1 sm:grid-cols-2 gap-3 my-6">
           {[
-            { title: 'Style Guides', desc: 'Step-by-step outfit guides for every occasion' },
-            { title: 'Product Reviews', desc: 'Honest, tested reviews of clothing and accessories' },
-            { title: 'Retailer Comparisons', desc: 'Side-by-side breakdowns to help you shop smarter' },
-            { title: 'Capsule Wardrobes', desc: 'Minimalist wardrobe plans that maximize outfits' },
-            { title: 'Body Type Guides', desc: 'Flattering styles for every shape and size' },
-            { title: 'Trend Reports', desc: 'What to buy now and what to skip' },
+            { title: 'Viral Products', desc: 'We test TikTok and Amazon finds so you don\'t have to' },
+            { title: 'Product Reviews', desc: 'Honest, tested reviews of trending products' },
+            { title: 'Head-to-Head Comparisons', desc: 'Side-by-side breakdowns to help you choose' },
+            { title: 'Lifestyle Trends', desc: 'Food, travel, tech, and culture picks' },
+            { title: 'Side Hustle Guides', desc: 'Real ways to earn extra income in 2026' },
+            { title: 'Trend Reports', desc: 'What\'s worth the hype and what to skip' },
           ].map((item, i) => (
             <div key={i} className="border border-gray-100 rounded-xl p-4 bg-white">
               <h3 className="font-display font-bold text-sm text-gray-900 mb-1">{item.title}</h3>
