@@ -7,11 +7,11 @@ export default function TrendingProducts() {
   return (
     <section className="mb-20">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-          TRENDING
-          <span className="block h-1 w-16 bg-accent mt-2" />
+        <h2 className="font-display text-2xl sm:text-3xl font-bold text-gray-900">
+          Trending
+          <span className="block h-1 w-16 bg-coral-500 mt-2 rounded-full" />
         </h2>
-        <a href="/shop" className="text-sm font-display font-bold uppercase tracking-wide text-zinc-400 hover:text-accent transition-colors">
+        <a href="/guides" className="text-sm font-display font-semibold text-gray-400 hover:text-coral-500 transition-colors">
           View all
         </a>
       </div>

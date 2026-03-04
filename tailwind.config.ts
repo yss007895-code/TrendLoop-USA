@@ -5,19 +5,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        accent: '#e2ff00',
-        'accent-blue': '#0019FF',
-        surface: '#1a1a1a',
-        muted: '#999999',
-        border: '#333333',
+        coral: {
+          50: '#fff5f2',
+          100: '#ffe8e0',
+          200: '#ffd0c2',
+          300: '#ffb09a',
+          400: '#ff8b6b',
+          500: '#FF6B47',
+          600: '#e55530',
+          700: '#c44425',
+          800: '#9e371f',
+          900: '#7d2f1c',
+          950: '#44160b',
+        },
+        surface: {
+          DEFAULT: '#ffffff',
+          light: '#fafafa',
+          muted: '#f5f5f4',
+          border: '#e7e5e4',
+          'border-dark': '#d6d3d1',
+        },
+        accent: '#FF6B47',
       },
       fontFamily: {
-        display: ['"Instrument Sans"', 'Arial', 'sans-serif'],
-        body: ['"Source Sans 3"', 'Helvetica', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body: ['"Inter"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
-      },
-      letterSpacing: {
-        'tight-brand': '-0.03em',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-out',

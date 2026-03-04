@@ -12,10 +12,10 @@ export default function HomePage() {
   const deepDives = guides.slice(0, 3);
 
   const categoryPills = [
-    { label: 'Viral Finds', href: '/shop' },
-    { label: 'Tech', href: '/guides/best-tech-under-50-2026' },
-    { label: 'Room Aesthetic', href: '/guides/gen-z-room-aesthetic-budget-2026' },
-    { label: 'Style', href: '/guides' },
+    { label: 'Trending Now', href: '/guides' },
+    { label: 'Home & Living', href: '/guides/best-standing-desks-2026' },
+    { label: 'Health & Wellness', href: '/guides/top-fitness-trackers-2026' },
+    { label: 'Outdoor', href: '/guides/camping-essentials-guide-2026' },
   ];
 
   const organizationJsonLd = {
@@ -53,23 +53,23 @@ export default function HomePage() {
         name: 'What is TrendLoop USA?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'TrendLoop USA is a Gen Z trend platform that curates viral products, aesthetic room finds, budget tech, and style picks from Amazon — all under $50.',
+          text: 'TrendLoop USA is a product discovery platform that tests and reviews trending products across categories like kitchen gadgets, home office, health & wellness, and outdoor gear.',
         },
       },
       {
         '@type': 'Question',
-        name: 'Are the products really under $30?',
+        name: 'How does TrendLoop USA test products?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes! Our Budget Picks section features hand-picked Gen Z fashion and lifestyle products all priced under $30. We update our picks weekly based on trending Amazon finds.',
+          text: 'Our editorial team tests products in real-world conditions over extended periods. We use standardized testing methodologies, compare products against direct competitors, and provide honest assessments with detailed pros and cons.',
         },
       },
       {
         '@type': 'Question',
-        name: 'How do you choose viral products?',
+        name: 'Does TrendLoop USA earn affiliate commissions?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Our editors track trending products across social platforms and curate the ones that are genuinely useful, affordable, and worth the hype. We only feature products with strong reviews.',
+          text: 'Yes. Some links on our site are affiliate links (primarily Amazon Associates), meaning we may earn a small commission when you make a purchase. This never influences our editorial recommendations. See our full disclaimer for details.',
         },
       },
     ],
@@ -90,21 +90,23 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div>
-        {/* Hero — Verge-style dark with neon accent */}
-        <section className="-mx-6 px-6 border-b border-zinc-800 py-20 mb-12">
+        {/* Hero -- Coral warm theme */}
+        <section className="-mx-6 px-6 bg-coral-500 py-20 mb-12">
           <div className="max-w-7xl mx-auto">
-            <h1 className="font-display text-[3.5rem] sm:text-[5rem] lg:text-[6rem] font-black leading-none text-accent uppercase" style={{ letterSpacing: '-0.03em' }}>
-              TRENDLOOP
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+              Trending products,
+              <br />
+              <span className="text-coral-100">honestly reviewed.</span>
             </h1>
-            <p className="text-lg sm:text-xl text-zinc-500 mt-4 max-w-xl font-body">
-              Viral finds, budget tech, aesthetic room picks, and Gen Z fashion — all under $50.
+            <p className="text-lg sm:text-xl text-white/80 mt-4 max-w-xl font-body">
+              We test the products everyone is talking about -- so you know what is actually worth your money.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-8">
-              <Link href="/shop" className="btn-primary text-center">
-                Shop Viral Finds
+              <Link href="/guides" className="bg-white text-coral-600 font-display font-bold px-8 py-3.5 text-sm rounded-lg hover:bg-coral-50 transition-colors text-center">
+                Explore What&apos;s Trending
               </Link>
-              <Link href="/guides" className="btn-secondary text-center">
-                Browse Guides
+              <Link href="/about" className="bg-coral-600 text-white font-display font-bold px-8 py-3.5 text-sm rounded-lg border-2 border-coral-400 hover:bg-coral-700 transition-colors text-center">
+                How We Test
               </Link>
             </div>
           </div>
@@ -116,7 +118,7 @@ export default function HomePage() {
             <Link
               key={pill.label}
               href={pill.href}
-              className="px-5 py-2 bg-zinc-900 text-zinc-400 font-display font-bold text-sm uppercase tracking-wide hover:bg-accent hover:text-black transition-colors border border-zinc-800"
+              className="px-5 py-2 bg-surface-muted text-gray-600 font-display font-semibold text-sm rounded-full hover:bg-coral-50 hover:text-coral-600 transition-colors border border-surface-border"
             >
               {pill.label}
             </Link>
@@ -129,14 +131,14 @@ export default function HomePage() {
         {/* Trending Products */}
         <TrendingProducts />
 
-        {/* Deep Dives — Numbered guides */}
+        {/* Deep Dives -- Guide cards */}
         <section className="mb-20">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-              DEEP DIVES
-              <span className="block h-1 w-16 bg-accent mt-2" />
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-gray-900">
+              Deep Dives
+              <span className="block h-1 w-16 bg-coral-500 mt-2 rounded-full" />
             </h2>
-            <Link href="/guides" className="text-sm font-display font-bold uppercase tracking-wide text-zinc-400 hover:text-accent transition-colors">
+            <Link href="/guides" className="text-sm font-display font-semibold text-gray-400 hover:text-coral-500 transition-colors">
               View all
             </Link>
           </div>

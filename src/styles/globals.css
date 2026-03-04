@@ -2,95 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @layer base {
   body {
-    @apply bg-black text-white font-body;
+    @apply bg-white text-gray-800 font-body;
   }
   ::selection {
-    @apply bg-accent text-black;
+    @apply bg-coral-500/20 text-coral-900;
   }
 }
 
 @layer components {
   .card {
-    @apply bg-surface;
+    @apply bg-white border border-surface-border rounded-xl;
   }
   .card-hover {
-    @apply card transition-colors duration-200 hover:bg-zinc-800;
+    @apply card transition-all duration-200 hover:shadow-md hover:border-coral-200;
   }
   .btn-primary {
-    @apply bg-accent text-black font-display font-bold px-8 py-3.5 text-sm uppercase tracking-wide hover:bg-white transition-colors duration-200;
+    @apply bg-coral-500 text-white font-display font-bold px-8 py-3.5 text-sm rounded-lg hover:bg-coral-600 transition-colors duration-200;
   }
   .btn-secondary {
-    @apply bg-transparent border-2 border-zinc-700 text-white font-display font-bold px-8 py-3.5 text-sm uppercase tracking-wide hover:border-accent hover:text-accent transition-colors duration-200;
+    @apply bg-white border-2 border-surface-border-dark text-gray-700 font-display font-bold px-8 py-3.5 text-sm rounded-lg hover:border-coral-400 hover:text-coral-600 transition-colors duration-200;
   }
   .badge {
-    @apply inline-flex items-center px-3 py-1 text-[11px] font-bold uppercase tracking-wider;
+    @apply inline-flex items-center px-3 py-1 text-[11px] font-bold uppercase tracking-wider rounded-full;
   }
   .badge-new {
-    @apply badge bg-accent text-black;
+    @apply badge bg-coral-500 text-white;
   }
   .badge-hot {
-    @apply badge bg-white text-black;
+    @apply badge bg-coral-100 text-coral-700;
   }
   .badge-category {
-    @apply badge bg-surface text-white;
+    @apply badge bg-surface-muted text-gray-600;
   }
   .section-title {
-    @apply font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight;
+    @apply font-display text-xl sm:text-2xl font-bold text-gray-900;
   }
 
   .product-card {
-    @apply bg-surface overflow-hidden transition-colors duration-200;
+    @apply bg-white border border-surface-border rounded-xl overflow-hidden transition-all duration-200;
   }
   .product-card:hover {
-    @apply bg-zinc-800;
+    @apply shadow-md border-coral-200;
   }
   .product-card:hover .product-card-action {
     @apply opacity-100;
   }
   .price-current {
-    @apply font-mono font-bold text-accent;
+    @apply font-mono font-bold text-coral-600;
   }
   .price-original {
-    @apply font-mono text-muted line-through text-sm;
+    @apply font-mono text-gray-400 line-through text-sm;
   }
   .urgency-text {
-    @apply text-xs text-accent font-bold uppercase tracking-wide;
+    @apply text-xs text-coral-600 font-bold uppercase tracking-wide;
   }
 
   .tab-active {
-    @apply text-accent border-b-2 border-accent;
+    @apply text-coral-500 border-b-2 border-coral-500;
   }
   .tab-inactive {
-    @apply text-muted hover:text-white border-b-2 border-transparent;
+    @apply text-gray-400 hover:text-gray-700 border-b-2 border-transparent;
   }
 
   .prose-style h2 {
-    @apply font-display text-2xl font-black text-white mt-10 mb-4 uppercase tracking-tight;
+    @apply font-display text-2xl font-bold text-gray-900 mt-10 mb-4;
   }
   .prose-style h3 {
-    @apply font-display text-xl font-bold text-white mt-8 mb-3;
+    @apply font-display text-xl font-semibold text-gray-800 mt-8 mb-3;
   }
   .prose-style p {
-    @apply text-zinc-400 leading-relaxed mb-4;
+    @apply text-gray-600 leading-relaxed mb-4;
   }
   .prose-style a {
-    @apply text-accent hover:text-white underline underline-offset-2;
+    @apply text-coral-500 hover:text-coral-700 underline underline-offset-2;
+  }
+  .prose-style ul {
+    @apply list-disc list-inside mb-4 space-y-1;
+  }
+  .prose-style li {
+    @apply text-gray-600 leading-relaxed;
   }
   .prose-style blockquote {
-    @apply border-l-4 border-accent bg-surface px-6 py-4 my-6 font-body text-zinc-400;
+    @apply border-l-4 border-coral-300 bg-coral-50 px-6 py-4 my-6 font-body text-gray-600 rounded-r-lg;
   }
   .prose-style table {
     @apply w-full border-collapse mb-6;
   }
   .prose-style th {
-    @apply bg-surface text-accent font-mono text-sm font-bold px-4 py-3 text-left;
+    @apply bg-coral-50 text-gray-900 font-display text-sm font-bold px-4 py-3 text-left;
   }
   .prose-style td {
-    @apply px-4 py-3 text-sm text-zinc-400 border-b border-zinc-800;
+    @apply px-4 py-3 text-sm text-gray-600 border-b border-surface-border;
+  }
+  .prose-style strong {
+    @apply text-gray-800;
   }
 }
 
@@ -106,7 +115,7 @@
 }
 
 *:focus-visible {
-  @apply outline-2 outline-offset-2 outline-accent;
+  @apply outline-2 outline-offset-2 outline-coral-500;
 }
 
 html {
@@ -114,7 +123,7 @@ html {
 }
 
 .skip-link {
-  @apply absolute -top-10 left-4 bg-accent text-black px-4 py-2 z-[100] text-sm font-display font-bold uppercase tracking-wide;
+  @apply absolute -top-10 left-4 bg-coral-500 text-white px-4 py-2 z-[100] text-sm font-display font-bold rounded-b-lg;
   transition: top 0.2s;
 }
 .skip-link:focus {

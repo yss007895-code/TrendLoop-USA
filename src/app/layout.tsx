@@ -9,17 +9,17 @@ import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'TrendLoop USA — Trends, Culture & Lifestyle', template: '%s | TrendLoop USA' },
+  title: { default: 'TrendLoop USA -- Trending Products, Honestly Reviewed', template: '%s | TrendLoop USA' },
   description: SITE_DESCRIPTION,
-  keywords: ['trending 2026', 'viral products', 'lifestyle trends', 'food trends', 'best side hustles', 'streaming comparison', 'amazon finds', 'digital nomad', 'meal kits review', 'electric cars affordable'],
+  keywords: ['trending products 2026', 'product reviews', 'buying guides', 'home and living', 'health wellness', 'outdoor gear', 'kitchen gadgets', 'standing desks', 'fitness trackers', 'air purifiers', 'camping essentials', 'amazon finds', 'lifestyle'],
   other: {
     'google-adsense-account': 'ca-pub-8049649445649586',
   },
   openGraph: {
     type: 'website', locale: 'en_US', url: SITE_URL, siteName: SITE_NAME,
-    title: 'TrendLoop USA — Trends, Culture & Lifestyle',
-    description: 'Viral finds, trending products, lifestyle tips, and culture picks — what\'s worth your time and money in 2026.',
-    images: [{ url: '/images/guides/old-money-aesthetic-on-a-budget-2026-hero.jpg', width: 1200, height: 630, alt: 'TrendLoop USA' }],
+    title: 'TrendLoop USA -- Trending Products, Honestly Reviewed',
+    description: 'Viral finds, trending products, lifestyle tips, and honest reviews -- what\'s worth your time and money in 2026.',
+    images: [{ url: '/images/shop/tlu-hero-viral-finds-hero.webp', width: 1200, height: 630, alt: 'TrendLoop USA' }],
   },
   twitter: { card: 'summary_large_image', site: '@trendloopusa', creator: '@trendloopusa' },
   alternates: { canonical: SITE_URL },
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
-      <body className="min-h-screen bg-black text-white antialiased font-body">
+      <body className="min-h-screen bg-white text-gray-800 antialiased font-body">
         <a href="#main-content" className="skip-link">Skip to content</a>
         <script
           type="application/ld+json"

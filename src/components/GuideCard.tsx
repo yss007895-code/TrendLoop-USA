@@ -6,9 +6,9 @@ export default function GuideCard({ guide, index }: { guide: StyleGuide; index?:
   const num = index !== undefined ? String(index + 1).padStart(2, '0') : null;
 
   return (
-    <Link href={`/guides/${guide.slug}`} className="group block border-t border-zinc-800 pt-5">
+    <Link href={`/guides/${guide.slug}`} className="group block border-t border-surface-border pt-5">
       {guide.image && (
-        <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-surface">
+        <div className="relative aspect-[16/10] overflow-hidden mb-4 bg-surface-light rounded-xl">
           <SafeImage
             src={guide.image}
             alt={guide.title}
@@ -17,7 +17,7 @@ export default function GuideCard({ guide, index }: { guide: StyleGuide; index?:
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3">
-            <span className="text-[11px] font-display font-bold text-black bg-accent px-3 py-1 uppercase tracking-wide">
+            <span className="text-[11px] font-display font-bold text-white bg-coral-500 px-3 py-1 rounded-full uppercase tracking-wide">
               {guide.tag}
             </span>
           </div>
@@ -26,19 +26,19 @@ export default function GuideCard({ guide, index }: { guide: StyleGuide; index?:
       <div>
         <div className="flex items-start gap-4">
           {num && (
-            <span className="font-mono text-3xl font-bold text-accent leading-none shrink-0 mt-0.5">
+            <span className="font-mono text-3xl font-bold text-coral-400 leading-none shrink-0 mt-0.5">
               {num}
             </span>
           )}
           <div>
-            <h3 className="font-display font-bold text-white group-hover:text-accent transition-colors leading-snug text-lg">
+            <h3 className="font-display font-bold text-gray-900 group-hover:text-coral-500 transition-colors leading-snug text-lg">
               {guide.title}
             </h3>
-            <p className="text-sm text-zinc-500 mt-1.5 line-clamp-2">{guide.description}</p>
+            <p className="text-sm text-gray-500 mt-1.5 line-clamp-2">{guide.description}</p>
             <div className="flex items-center gap-3 mt-2">
-              <span className="text-xs font-mono text-zinc-600">{guide.readTime}</span>
+              <span className="text-xs font-mono text-gray-400">{guide.readTime}</span>
               {guide.affiliateProducts && guide.affiliateProducts.length > 0 && (
-                <span className="text-xs font-mono text-zinc-600">
+                <span className="text-xs font-mono text-gray-400">
                   {guide.affiliateProducts.length} items
                 </span>
               )}

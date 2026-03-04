@@ -7,9 +7,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const links = [
-    { href: '/shop', label: 'Shop' },
     { href: '/guides', label: 'Guides' },
-    { href: '/blog', label: 'The Loop' },
+    { href: '/about', label: 'About' },
+    { href: '/disclaimer', label: 'Disclaimer' },
   ];
 
   const isActive = (href: string) => {
@@ -18,11 +18,11 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-zinc-800">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-surface-border">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-14">
-          <Link href="/" className="font-display font-black text-xl tracking-tight-brand text-accent uppercase">
-            TRENDLOOP
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="font-display font-extrabold text-xl tracking-tight text-coral-500">
+            TrendLoop
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
@@ -31,20 +31,26 @@ export default function Header() {
                 key={l.href}
                 href={l.href}
                 aria-current={isActive(l.href) ? 'page' : undefined}
-                className={`px-4 py-2 text-sm font-display font-bold uppercase tracking-wide transition-colors ${
+                className={`px-4 py-2 text-sm font-display font-semibold transition-colors rounded-lg ${
                   isActive(l.href)
-                    ? 'text-accent'
-                    : 'text-zinc-400 hover:text-accent'
+                    ? 'text-coral-500 bg-coral-50'
+                    : 'text-gray-600 hover:text-coral-500 hover:bg-coral-50'
                 }`}
               >
                 {l.label}
               </Link>
             ))}
+            <Link
+              href="/guides"
+              className="ml-2 bg-coral-500 hover:bg-coral-600 text-white text-sm font-display font-bold px-5 py-2 rounded-lg transition-colors"
+            >
+              Explore What&apos;s Trending
+            </Link>
           </nav>
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-zinc-400 hover:text-accent p-2"
+            className="md:hidden text-gray-500 hover:text-coral-500 p-2"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -57,22 +63,29 @@ export default function Header() {
         </div>
 
         {open && (
-          <nav className="md:hidden pb-4 pt-2 animate-fade-in border-t border-zinc-800">
+          <nav className="md:hidden pb-4 pt-2 animate-fade-in border-t border-surface-border">
             {links.map(l => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 aria-current={isActive(l.href) ? 'page' : undefined}
-                className={`block px-4 py-3 text-sm font-display font-bold uppercase tracking-wide ${
+                className={`block px-4 py-3 text-sm font-display font-semibold rounded-lg ${
                   isActive(l.href)
-                    ? 'text-accent'
-                    : 'text-zinc-400 hover:text-accent'
+                    ? 'text-coral-500 bg-coral-50'
+                    : 'text-gray-600 hover:text-coral-500 hover:bg-coral-50'
                 }`}
               >
                 {l.label}
               </Link>
             ))}
+            <Link
+              href="/guides"
+              onClick={() => setOpen(false)}
+              className="block mx-4 mt-3 text-center bg-coral-500 hover:bg-coral-600 text-white text-sm font-display font-bold px-5 py-2.5 rounded-lg transition-colors"
+            >
+              Explore What&apos;s Trending
+            </Link>
           </nav>
         )}
       </div>
