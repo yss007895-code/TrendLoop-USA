@@ -40,6 +40,16 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Our Network */}
+        <div className="mt-10 pt-8 border-t border-gray-800">
+          <h4 className="font-display font-bold text-sm tracking-wide mb-4 text-gray-200">Our Network</h4>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <a href="https://securechoiceguide.com" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-coral-400 transition-colors">SecureChoiceGuide</a>
+            <a href="https://smarttoolpicks.net" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-coral-400 transition-colors">SmartToolPicks</a>
+            <a href="https://stylemedaily.org" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-coral-400 transition-colors">StyleMeDaily</a>
+          </div>
+        </div>
+
         <div className="mt-12 p-4 border border-gray-800 rounded-lg">
           <p className="text-xs text-gray-500 leading-relaxed">
             <span className="font-bold text-gray-400">Affiliate Disclosure:</span> TrendLoop USA is a participant in the Amazon Services LLC Associates Program and other affiliate programs. Some links on this site are affiliate links, meaning we may earn a small commission at no extra cost to you when you make a purchase through our links.
